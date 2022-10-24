@@ -1,6 +1,5 @@
 function Player() : JSX.Element {
   return (
-    <body>
       <div className="player">
         <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
 
@@ -33,7 +32,6 @@ function Player() : JSX.Element {
           </div>
         </div>
       </div>
-    </body>
   );
 }
 

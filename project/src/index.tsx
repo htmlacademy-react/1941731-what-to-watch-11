@@ -5,7 +5,8 @@ import App from './components/app/app';
 const PromoFilm = {
   Name: 'The Grand Budapest Hotel',
   Src: 'img/the-grand-budapest-hotel-poster.jpg',
-  Genre: 'drama',
+  BackgroundSrc: 'img/bg-the-grand-budapest-hotel.jpg',
+  Genre: 'Drama',
   Date: 2014
 };
 
@@ -16,10 +17,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <App
-      promoFilmName = {PromoFilm.Name}
-      promoFilmGenre={PromoFilm.Genre}
-      promoFilmDate={PromoFilm.Date}
-      promoFilmSrc={PromoFilm.Src}
+      promoFilm ={PromoFilm}
     />
   </React.StrictMode>,
 );

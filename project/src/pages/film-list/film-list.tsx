@@ -1,19 +1,99 @@
 import SmallFilmCard from '../../components/small-film-card/small-film-card';
+import {PromoFilm} from '../../components/app/app';
 
 type FilmListProps = {
-  promoFilmName: string;
-  promoFilmSrc: string;
-  promoFilmGenre: string;
-  promoFilmDate: number;
+  promoFilm: PromoFilm;
 }
-// название, жанр и дата выхода промо-фильма
 
-function FilmList({promoFilmName, promoFilmSrc, promoFilmGenre, promoFilmDate} : FilmListProps): JSX.Element {
+const filmList = [
+  {
+    filmName: 'Fantastic Beasts: The Crimes of Grindelwald',
+    srcImg:  'img/fantastic-beasts-the-crimes-of-grindelwald.jpg'
+  },
+  {
+    filmName: 'Bohemian Rhapsody',
+    srcImg:' img/bohemian-rhapsody.jpg'
+  },
+  {
+    filmName: 'Macbeth',
+    srcImg:' img/macbeth.jpg'
+  },
+  {
+    filmName: 'Aviator',
+    srcImg:' img/aviator.jpg'
+  },
+  {
+    filmName: 'We need to talk about Kevin',
+    srcImg:  'img/we-need-to-talk-about-kevin.jpg'
+  },
+  {
+    filmName: 'What We Do in the Shadows',
+    srcImg: 'img/what-we-do-in-the-shadows.jpg'
+  },
+  {
+    filmName: 'Revenant',
+    srcImg:' img/revenant.jpg'
+  },
+  {
+    filmName: 'Johnny English',
+    srcImg:' img/johnny-english.jpg'
+  },
+  {
+    filmName: 'Shutter Island',
+    srcImg:  'img/shutter-island.jpg'
+  },
+  {
+    filmName: 'Pulp Fiction',
+    srcImg:' img/pulp-fiction.jpg'
+  },
+  {
+    filmName: 'No Country for Old Men',
+    srcImg:' img/no-country-for-old-men.jpg'
+  },
+  {
+    filmName: 'Snatch',
+    srcImg:' img/snatch.jpg'
+  },
+  {
+    filmName: 'Moonrise Kingdom',
+    srcImg:  'img/moonrise-kingdom.jpg'
+  },
+  {
+    filmName: 'Seven Years in Tibet',
+    srcImg:' img/seven-years-in-tibet.jpg'
+  },
+  {
+    filmName: 'Midnight Special',
+    srcImg:' img/midnight-special.jpg'
+  },
+  {
+    filmName: 'War of the Worlds',
+    srcImg:' img/war-of-the-worlds.jpg'
+  },
+  {
+    filmName: 'Dardjeeling Limited',
+    srcImg:  'img/dardjeeling-limited.jpg'
+  },
+  {
+    filmName: 'Orlando',
+    srcImg:' img/orlando.jpg'
+  },
+  {
+    filmName: 'Mindhunter',
+    srcImg:' img/mindhunter.jpg'
+  },
+  {
+    filmName: 'Midnight Special',
+    srcImg: 'img/midnight-special.jpg'
+  },
+];
+
+function FilmList({promoFilm} : FilmListProps): JSX.Element {
   return (
-    <body>
+    <div>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src={promoFilmSrc} alt={promoFilmName}/>
+          <img src={promoFilm.BackgroundSrc} alt={promoFilm.Name}/>
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -42,14 +122,14 @@ function FilmList({promoFilmName, promoFilmSrc, promoFilmGenre, promoFilmDate} :
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src={promoFilmSrc} alt={promoFilmName} width="218" height="327"/>
+              <img src={promoFilm.Src} alt={promoFilm.Name} width="218" height="327"/>
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{promoFilmName}</h2>
+              <h2 className="film-card__title">{promoFilm.Name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{promoFilmGenre}</span>
-                <span className="film-card__year">{promoFilmDate}</span>
+                <span className="film-card__genre">{promoFilm.Genre}</span>
+                <span className="film-card__year">{promoFilm.Date}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -110,26 +190,7 @@ function FilmList({promoFilmName, promoFilmSrc, promoFilmGenre, promoFilmDate} :
           </ul>
 
           <div className="catalog__films-list">
-            <SmallFilmCard filmName={'Fantastic Beasts: The Crimes of Grindelwald'} srcImg={'img/fantastic-beasts-the-crimes-of-grindelwald.jpg'}/>
-            <SmallFilmCard filmName={'Bohemian Rhapsody'} srcImg={'img/bohemian-rhapsody.jpg'}/>
-            <SmallFilmCard filmName={'Macbeth'} srcImg={'img/macbeth.jpg'}/>
-            <SmallFilmCard filmName={'Aviator'} srcImg={'img/aviator.jpg'}/>
-            <SmallFilmCard filmName={'We need to talk about Kevin'} srcImg={'img/we-need-to-talk-about-kevin.jpg'}/>
-            <SmallFilmCard filmName={'What We Do in the Shadows'} srcImg={'img/what-we-do-in-the-shadows.jpg'}/>
-            <SmallFilmCard filmName={'Revenant'} srcImg={'img/revenant.jpg'}/>
-            <SmallFilmCard filmName={'Johnny English'} srcImg={'img/johnny-english.jpg'}/>
-            <SmallFilmCard filmName={'Shutter Island'} srcImg={'img/shutter-island.jpg'}/>
-            <SmallFilmCard filmName={'Pulp Fiction'} srcImg={'img/pulp-fiction.jpg'}/>
-            <SmallFilmCard filmName={'No Country for Old Men'} srcImg={'img/no-country-for-old-men.jpg'}/>
-            <SmallFilmCard filmName={'Snatch'} srcImg={'img/snatch.jpg'}/>
-            <SmallFilmCard filmName={'Moonrise Kingdom'} srcImg={'img/moonrise-kingdom.jpg'}/>
-            <SmallFilmCard filmName={'Seven Years in Tibet'} srcImg={'img/seven-years-in-tibet.jpg'}/>
-            <SmallFilmCard filmName={'Midnight Special'} srcImg={'img/midnight-special.jpg'}/>
-            <SmallFilmCard filmName={'War of the Worlds'} srcImg={'img/war-of-the-worlds.jpg'}/>
-            <SmallFilmCard filmName={'Dardjeeling Limited<'} srcImg={'img/dardjeeling-limited.jpg'}/>
-            <SmallFilmCard filmName={'Orlando'} srcImg={'img/orlando.jpg'}/>
-            <SmallFilmCard filmName={'Mindhunter'} srcImg={'img/mindhunter.jpg'}/>
-            <SmallFilmCard filmName={'Midnight Special'} srcImg={'img/midnight-special.jpg'}/>
+            {filmList.map((film) => <SmallFilmCard key ={film.filmName} filmName={film.filmName} srcImg={film.srcImg}/>)}
           </div>
 
           <div className="catalog__more">
@@ -151,7 +212,7 @@ function FilmList({promoFilmName, promoFilmSrc, promoFilmGenre, promoFilmDate} :
           </div>
         </footer>
       </div>
-    </body>
+    </div>
   );
 }
 

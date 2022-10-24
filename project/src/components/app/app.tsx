@@ -1,15 +1,19 @@
 import FilmList from '../../pages/film-list/film-list';
 
-type AppScreenProps = {
-  promoFilmName: string;
-  promoFilmSrc: string;
-  promoFilmDate: number;
-  promoFilmGenre: string;
+export type PromoFilm = {
+  Name: string;
+  Src: string;
+  BackgroundSrc: string;
+  Date: number;
+  Genre: string;
 }
 
-function App({promoFilmName, promoFilmSrc, promoFilmGenre, promoFilmDate} : AppScreenProps): JSX.Element{
+type AppScreenProps = {
+  promoFilm: PromoFilm;
+}
+function App({promoFilm} : AppScreenProps): JSX.Element{
   return (
-    <FilmList promoFilmName={promoFilmName} promoFilmSrc={promoFilmSrc} promoFilmDate={promoFilmDate} promoFilmGenre={promoFilmGenre}/>
+    <FilmList promoFilm = {promoFilm}/>
   );
 }
 

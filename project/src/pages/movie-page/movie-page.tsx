@@ -1,6 +1,6 @@
 function MoviePage() : JSX.Element {
   return (
-    <body>
+    <div>
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
@@ -158,8 +158,7 @@ function MoviePage() : JSX.Element {
           </div>
         </footer>
       </div>
-    </body>
-
+    </div>
   );
 }
 
