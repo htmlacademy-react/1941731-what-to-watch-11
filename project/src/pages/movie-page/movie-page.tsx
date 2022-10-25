@@ -1,4 +1,5 @@
 function MoviePage() : JSX.Element {
+
   return (
     <div>
       <section className="film-card film-card--full">
