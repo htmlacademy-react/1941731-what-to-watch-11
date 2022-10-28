@@ -1,4 +1,6 @@
 export enum AppRoute {
+  Main = '/',
+  Unknown = '*',
   SignIn = '/sign-in',
   MyList = '/my-list',
   MoviePage = '/films:id',

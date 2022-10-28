@@ -93,7 +93,7 @@ function FilmList({promoFilm} : FilmListProps): JSX.Element {
     <div>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src={promoFilm.BackgroundSrc} alt={promoFilm.Name}/>
+          <img src={promoFilm.backgroundSrc} alt={promoFilm.name}/>
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -122,14 +122,14 @@ function FilmList({promoFilm} : FilmListProps): JSX.Element {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src={promoFilm.Src} alt={promoFilm.Name} width="218" height="327"/>
+              <img src={promoFilm.src} alt={promoFilm.name} width="218" height="327"/>
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{promoFilm.Name}</h2>
+              <h2 className="film-card__title">{promoFilm.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{promoFilm.Genre}</span>
-                <span className="film-card__year">{promoFilm.Date}</span>
+                <span className="film-card__genre">{promoFilm.genre}</span>
+                <span className="film-card__year">{promoFilm.date}</span>
               </p>
 
               <div className="film-card__buttons">

@@ -11,11 +11,11 @@ import Error404 from '../../pages/error-404/error-404';
 import PrivateRoute from '../private-route/private-route';
 
 export type PromoFilm = {
-  Name: string;
-  Src: string;
-  BackgroundSrc: string;
-  Date: number;
-  Genre: string;
+  name: string;
+  src: string;
+  backgroundSrc: string;
+  date: number;
+  genre: string;
 }
 
 type AppScreenProps = {
@@ -25,7 +25,7 @@ function App({promoFilm} : AppScreenProps): JSX.Element{
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/'>
+        <Route path={AppRoute.Main}>
           <Route index element={<FilmList promoFilm = {promoFilm}/>}/>
           <Route path ={AppRoute.SignIn} element={<SignIn/>}/>
 
@@ -42,7 +42,7 @@ function App({promoFilm} : AppScreenProps): JSX.Element{
           <Route path ={AppRoute.AddReview} element={<AddReview/>}/>
           <Route path ={AppRoute.Player} element={<Player/>}/>
         </Route>
-        <Route path='*' element={<Error404/>}/>
+        <Route path={AppRoute.Unknown} element={<Error404/>}/>
       </Routes>
     </BrowserRouter>
   );
