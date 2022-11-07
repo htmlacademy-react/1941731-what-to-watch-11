@@ -1,111 +1,28 @@
-import SmallFilmCard from '../../components/small-film-card/small-film-card';
-import {PromoFilm} from '../../components/app/app';
+import {Films} from '../../types/films';
+import React from 'react';
+import FilmList from '../../components/film-list/film-list';
+import {AppRoute} from '../../const';
+import {Link} from 'react-router-dom';
+import HeaderLogo from '../../components/header-logo/header-logo';
 
-type FilmListProps = {
-  promoFilm: PromoFilm;
+
+type MainProps = {
+  films: Films;
 }
 
-const filmList = [
-  {
-    filmName: 'Fantastic Beasts: The Crimes of Grindelwald',
-    srcImg:  'img/fantastic-beasts-the-crimes-of-grindelwald.jpg'
-  },
-  {
-    filmName: 'Bohemian Rhapsody',
-    srcImg:' img/bohemian-rhapsody.jpg'
-  },
-  {
-    filmName: 'Macbeth',
-    srcImg:' img/macbeth.jpg'
-  },
-  {
-    filmName: 'Aviator',
-    srcImg:' img/aviator.jpg'
-  },
-  {
-    filmName: 'We need to talk about Kevin',
-    srcImg:  'img/we-need-to-talk-about-kevin.jpg'
-  },
-  {
-    filmName: 'What We Do in the Shadows',
-    srcImg: 'img/what-we-do-in-the-shadows.jpg'
-  },
-  {
-    filmName: 'Revenant',
-    srcImg:' img/revenant.jpg'
-  },
-  {
-    filmName: 'Johnny English',
-    srcImg:' img/johnny-english.jpg'
-  },
-  {
-    filmName: 'Shutter Island',
-    srcImg:  'img/shutter-island.jpg'
-  },
-  {
-    filmName: 'Pulp Fiction',
-    srcImg:' img/pulp-fiction.jpg'
-  },
-  {
-    filmName: 'No Country for Old Men',
-    srcImg:' img/no-country-for-old-men.jpg'
-  },
-  {
-    filmName: 'Snatch',
-    srcImg:' img/snatch.jpg'
-  },
-  {
-    filmName: 'Moonrise Kingdom',
-    srcImg:  'img/moonrise-kingdom.jpg'
-  },
-  {
-    filmName: 'Seven Years in Tibet',
-    srcImg:' img/seven-years-in-tibet.jpg'
-  },
-  {
-    filmName: 'Midnight Special',
-    srcImg:' img/midnight-special.jpg'
-  },
-  {
-    filmName: 'War of the Worlds',
-    srcImg:' img/war-of-the-worlds.jpg'
-  },
-  {
-    filmName: 'Dardjeeling Limited',
-    srcImg:  'img/dardjeeling-limited.jpg'
-  },
-  {
-    filmName: 'Orlando',
-    srcImg:' img/orlando.jpg'
-  },
-  {
-    filmName: 'Mindhunter',
-    srcImg:' img/mindhunter.jpg'
-  },
-  {
-    filmName: 'Midnight Special',
-    srcImg: 'img/midnight-special.jpg'
-  },
-];
+function Main({films} : MainProps): JSX.Element {
 
-function FilmList({promoFilm} : FilmListProps): JSX.Element {
   return (
-    <div>
+    <React.Fragment>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src={promoFilm.backgroundSrc} alt={promoFilm.name}/>
+          <img src={films[0].backgroundSrc} alt={films[0].filmName}/>
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
 
         <header className="page-header film-card__head">
-          <div className="logo">
-            <a className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+          <HeaderLogo/>
 
           <ul className="user-block">
             <li className="user-block__item">
@@ -122,14 +39,14 @@ function FilmList({promoFilm} : FilmListProps): JSX.Element {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src={promoFilm.src} alt={promoFilm.name} width="218" height="327"/>
+              <img src={films[0].srcImg} alt={films[0].filmName} width="218" height="327"/>
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{promoFilm.name}</h2>
+              <h2 className="film-card__title">{films[0].filmName}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{promoFilm.genre}</span>
-                <span className="film-card__year">{promoFilm.date}</span>
+                <span className="film-card__genre">{films[0].genre}</span>
+                <span className="film-card__year">{films[0].date}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -189,9 +106,7 @@ function FilmList({promoFilm} : FilmListProps): JSX.Element {
             </li>
           </ul>
 
-          <div className="catalog__films-list">
-            {filmList.map((film) => <SmallFilmCard key ={film.filmName} filmName={film.filmName} srcImg={film.srcImg}/>)}
-          </div>
+          <FilmList films = {films}/>
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
@@ -200,11 +115,11 @@ function FilmList({promoFilm} : FilmListProps): JSX.Element {
 
         <footer className="page-footer">
           <div className="logo">
-            <a className="logo__link logo__link--light">
+            <Link to={AppRoute.Main} className="logo__link logo__link--light">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            </Link>
           </div>
 
           <div className="copyright">
@@ -212,8 +127,8 @@ function FilmList({promoFilm} : FilmListProps): JSX.Element {
           </div>
         </footer>
       </div>
-    </div>
+    </React.Fragment>
   );
 }
 
-export default FilmList;
+export default Main;
