@@ -12,7 +12,7 @@ function AddReview({films} : AddReviewProps): JSX.Element | null {
   const params = useParams();
   const currentFilm = films.find((film) => film.id === params.id);
   if (currentFilm === undefined) {return (null);}
-  else {
+  {
     return (
       <section className="film-card film-card--full">
         <div className="film-card__header">

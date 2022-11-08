@@ -9,9 +9,13 @@ id: string;
 function SmallFilmCard(props: SmallFilmCardProps) {
   const [, setActiveFilmId] = useState('');
   return(
-    <article className="small-film-card catalog__films-card" onMouseOver={({target}: MouseEvent<HTMLInputElement>) => {
-      setActiveFilmId(props.id);
-    }}
+    <article className="small-film-card catalog__films-card"
+      onMouseOver={({target}: MouseEvent<HTMLInputElement>) => {
+        setActiveFilmId(props.id);
+      }}
+      onMouseLeave={({target}: MouseEvent<HTMLInputElement>) => {
+        setActiveFilmId('');
+      }}
     >
       <div className="small-film-card__image" >
         <img src={props.srcImg} alt={props.filmName} width="280" height="175"/>

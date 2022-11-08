@@ -14,10 +14,9 @@ function MoviePage({films} : MoviePageProps): JSX.Element | null {
   const currentFilm = films.find((film) => film.id === params.id);
 
   if (currentFilm === undefined) {return (null);}
-  else {
+  {
     return (
-
-      <React.Fragment>
+      <div>
         <section className="film-card film-card--full">
           <div className="film-card__hero">
             <div className="film-card__bg">
@@ -61,7 +60,7 @@ function MoviePage({films} : MoviePageProps): JSX.Element | null {
                     <span>My list</span>
                     <span className="film-card__count">9</span>
                   </button>
-                  <Link to="add-review" className="btn film-card__button">Add review</Link>
+                  <Link to="review" className="btn film-card__button">Add review</Link>
                 </div>
               </div>
             </div>
@@ -130,7 +129,7 @@ function MoviePage({films} : MoviePageProps): JSX.Element | null {
             </div>
           </footer>
         </div>
-      </React.Fragment>
+      </div>
     );
   }
 }

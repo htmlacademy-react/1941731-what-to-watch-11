@@ -1,10 +1,10 @@
 export enum AppRoute {
   Main = '/',
   Unknown = '*',
-  SignIn = '/sign-in',
+  SignIn = '/login',
   MyList = '/my-list',
   MoviePage = '/films/:id',
-  AddReview = '/films/:id/add-review',
+  AddReview = '/films/:id/review',
   Player = '/player/:id',
 }
 
@@ -13,3 +13,5 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
+
+export const AMOUNT_OF_STARS = 10;
