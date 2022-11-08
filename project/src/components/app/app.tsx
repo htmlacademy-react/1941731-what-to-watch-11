@@ -41,20 +41,4 @@ function App({films} : AppScreenProps): JSX.Element{
 
 export default App;
 
-// <Route path={AppRoute.Main}element={<Main films = {films}/>}/>
-// <Route path ={AppRoute.SignIn} element={<SignIn/>}/>
-//
-// <Route path ={AppRoute.MyList} element={
-//   <PrivateRoute
-//     authorizationStatus={AuthorizationStatus.NoAuth}
-//   >
-//     <MyList films={films} />
-//   </PrivateRoute>
-// }
-// />
-// <Route path ={AppRoute.MoviePage} element={<MoviePage films={films}/>}/>
-//
-// <Route path ={AppRoute.AddReview} element={<AddReview films={films}/>}/>
-// <Route path ={AppRoute.Player} element={<Player films={films}/>}/>
-// <Route path={AppRoute.Unknown} element={<Error404/>}/>
 
