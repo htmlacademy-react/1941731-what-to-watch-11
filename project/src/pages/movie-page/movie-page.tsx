@@ -9,11 +9,12 @@ type MoviePageProps = {
   films: Films;
 }
 
-function MoviePage({films} : MoviePageProps): JSX.Element {
+function MoviePage({films} : MoviePageProps): JSX.Element | null {
   const params = useParams();
   const currentFilm = films.find((film) => film.id === params.id);
 
-  if (currentFilm !== undefined) {
+  if (currentFilm === undefined) {return (null);}
+  else {
     return (
 
       <React.Fragment>
@@ -131,6 +132,6 @@ function MoviePage({films} : MoviePageProps): JSX.Element {
         </div>
       </React.Fragment>
     );
-  } else {return <div></div>;}
+  }
 }
 export default MoviePage;

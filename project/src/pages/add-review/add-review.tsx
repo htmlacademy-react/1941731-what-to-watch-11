@@ -8,10 +8,11 @@ import HeaderLogo from '../../components/header-logo/header-logo';
 type AddReviewProps = {
   films: Films;
 }
-function AddReview({films} : AddReviewProps): JSX.Element {
+function AddReview({films} : AddReviewProps): JSX.Element | null {
   const params = useParams();
   const currentFilm = films.find((film) => film.id === params.id);
-  if (currentFilm !== undefined) {
+  if (currentFilm === undefined) {return (null);}
+  else {
     return (
       <section className="film-card film-card--full">
         <div className="film-card__header">
@@ -56,7 +57,7 @@ function AddReview({films} : AddReviewProps): JSX.Element {
         </div>
       </section>
     );
-  }else {return <div></div>;}
+  }
 }
 
 export default AddReview;

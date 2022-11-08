@@ -5,11 +5,12 @@ import {useParams} from 'react-router-dom';
 type PlayerProps = {
   films: Films;
 }
-function Player({films} : PlayerProps): JSX.Element {
+function Player({films} : PlayerProps): JSX.Element | null{
   const params = useParams();
   const currentFilm = films.find((film) => film.id === params.id);
 
-  if (currentFilm !== undefined) {
+  if (currentFilm === undefined) {return (null);}
+  else{
     return (
       <div className="player">
         <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
@@ -44,6 +45,7 @@ function Player({films} : PlayerProps): JSX.Element {
         </div>
       </div>
     );
-  } else {return <div></div>;}}
+  }
+}
 
 export default Player;
