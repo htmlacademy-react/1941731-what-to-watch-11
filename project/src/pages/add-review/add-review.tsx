@@ -2,8 +2,9 @@ import {Films} from '../../types/films';
 import {useParams} from 'react-router-dom';
 import React from 'react';
 import AddComment from '../../components/add-comment/add-comment';
-import {Link} from 'react-router-dom';
-import HeaderLogo from '../../components/header-logo/header-logo';
+import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
+import Header from '../../components/header/header';
+import UserBlock from '../../components/user-block/user-block';
 
 type AddReviewProps = {
   films: Films;
@@ -22,30 +23,10 @@ function AddReview({films} : AddReviewProps): JSX.Element | null {
 
           <h1 className="visually-hidden">WTW</h1>
 
-          <header className="page-header">
-            <HeaderLogo/>
-            <nav className="breadcrumbs">
-              <ul className="breadcrumbs__list">
-                <li className="breadcrumbs__item">
-                  <Link to={`/films/${currentFilm.id}`} className="breadcrumbs__link">{currentFilm.filmName}</Link>
-                </li>
-                <li className="breadcrumbs__item">
-                  <a className="breadcrumbs__link">Add review</a>
-                </li>
-              </ul>
-            </nav>
-
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-                </div>
-              </li>
-              <li className="user-block__item">
-                <a className="user-block__link">Sign out</a>
-              </li>
-            </ul>
-          </header>
+          <Header>
+            <Breadcrumbs id={currentFilm.id} filmName={currentFilm.filmName}/>
+            <UserBlock/>
+          </Header>
 
           <div className="film-card__poster film-card__poster--small">
             <img src={currentFilm.srcImg} alt={`${currentFilm.filmName} poster`} width="218" height="327"/>
