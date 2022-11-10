@@ -19,7 +19,7 @@ export const films: Films = [
       director: 'Wes Anderson',
       starring: 'Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other'
     },
-    player: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
+    player: 'https://www.shutterstock.com/shutterstock/videos/1082214569/preview/stock-footage-air-plane-window-view-time-lapse-clouds-and-blue-sunny-sky-loop-of-white-clouds-over-blue-sky-with.webm',
   },
   {
     id: '2',
@@ -39,7 +39,7 @@ export const films: Films = [
       director: 'Bohemian Rhapsody',
       starring: 'Bohemian Rhapsody, Edward Norton, Jude Law, Willem Dafoe and other'
     },
-    player: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4'
+    player: 'https://www.shutterstock.com/shutterstock/videos/1059312542/preview/stock-footage-time-lapse-retail-warehouse-full-of-shelves-with-goods-in-cardboard-boxes-workers-scan-and-sort.webm'
   },
   {
     id: '3',
@@ -57,7 +57,7 @@ export const films: Films = [
       director: 'Macbeth',
       starring: 'Macbeth, Edward Norton, Jude Law, Willem Dafoe and other'
     },
-    player: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4'
+    player: 'https://www.shutterstock.com/shutterstock/videos/1058325193/preview/stock-footage-growing-plants-in-timelapse-sprouts-germination-newborn-plant.webm'
   },
   {
     id: '4',
@@ -75,7 +75,7 @@ export const films: Films = [
       director: 'Aviator',
       starring: 'Aviator, Edward Norton, Jude Law, Willem Dafoe and other'
     },
-    player: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4'
+    player: 'https://www.shutterstock.com/shutterstock/videos/1083845854/preview/stock-footage-sun-and-sky-reflecting-in-the-watch-during-the-time-passing-by-time-lapse-on-a-modern-white-clock.webm'
   },
   {
     id: '5',
@@ -93,7 +93,7 @@ export const films: Films = [
       director: 'We need to talk about Kevin',
       starring: 'We need to talk about Kevin, Edward Norton, Jude Law, Willem Dafoe and other'
     },
-    player: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4'
+    player: 'https://www.shutterstock.com/shutterstock/videos/1065503581/preview/stock-footage-times-square-new-york-usa-timelapse-of-busy-times-square-as-the-sun-sets.webm'
   },
   {
     id: '6',
@@ -111,7 +111,7 @@ export const films: Films = [
       director: 'What We Do in the Shadows',
       starring: 'What We Do in the Shadows, Edward Norton, Jude Law, Willem Dafoe and other'
     },
-    player: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4'
+    player: 'https://www.shutterstock.com/shutterstock/videos/1077627401/preview/stock-footage-aerial-car-factory-d-concept-automated-robot-arm-assembly-line-manufacturing-high-tech-green.webm'
   },
   {
     id: '7',
@@ -129,7 +129,7 @@ export const films: Films = [
       director: 'Revenant',
       starring: 'Revenant, Edward Norton, Jude Law, Willem Dafoe and other'
     },
-    player: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4'
+    player: 'https://www.shutterstock.com/shutterstock/videos/1063472734/preview/stock-footage--k-time-lapse-of-majestic-sunset-or-sunrise-landscape-amazing-light-of-nature-cloudscape-sky-and.webm'
   },
   {
     id: '8',
@@ -147,6 +147,6 @@ export const films: Films = [
       director: 'Johnny English',
       starring: 'Johnny English, Edward Norton, Jude Law, Willem Dafoe and other'
     },
-    player: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4'
+    player: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm'
   }
 ];

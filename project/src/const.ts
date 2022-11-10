@@ -14,4 +14,17 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export const Genres = [
+  'All genres',
+  'Comedies',
+  'Crime',
+  'Documentary',
+  'Dramas',
+  'Horror',
+  'Kids & Family',
+  'Romance',
+  'Sci - Fi',
+  'Thrillers',
+];
+
 export const AMOUNT_OF_STARS = 10;

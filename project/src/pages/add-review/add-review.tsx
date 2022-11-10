@@ -1,9 +1,12 @@
-import {Films} from '../../types/films';
-import {useParams} from 'react-router-dom';
 import React from 'react';
+import {useParams} from 'react-router-dom';
+
+import {Films} from '../../types/films';
 import AddComment from '../../components/add-comment/add-comment';
-import {Link} from 'react-router-dom';
-import HeaderLogo from '../../components/header-logo/header-logo';
+import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
+import Header from '../../components/header/header';
+import UserBlock from '../../components/user-block/user-block';
+import Wrapper from '../../components/wrapper/wrapper';
 
 type AddReviewProps = {
   films: Films;
@@ -14,48 +17,30 @@ function AddReview({films} : AddReviewProps): JSX.Element | null {
   if (currentFilm === undefined) {return (null);}
   {
     return (
-      <section className="film-card film-card--full">
-        <div className="film-card__header">
-          <div className="film-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel"/>
+      <Wrapper>
+        <section className="film-card film-card--full">
+          <div className="film-card__header">
+            <div className="film-card__bg">
+              <img src={films[0].backgroundSrc} alt={films[0].filmName}/>
+            </div>
+
+            <h1 className="visually-hidden">WTW</h1>
+
+            <Header>
+              <Breadcrumbs id={currentFilm.id} filmName={currentFilm.filmName}/>
+              <UserBlock/>
+            </Header>
+
+            <div className="film-card__poster film-card__poster--small">
+              <img src={currentFilm.srcImg} alt={`${currentFilm.filmName} poster`} width="218" height="327"/>
+            </div>
           </div>
 
-          <h1 className="visually-hidden">WTW</h1>
-
-          <header className="page-header">
-            <HeaderLogo/>
-            <nav className="breadcrumbs">
-              <ul className="breadcrumbs__list">
-                <li className="breadcrumbs__item">
-                  <Link to={`/films/${currentFilm.id}`} className="breadcrumbs__link">{currentFilm.filmName}</Link>
-                </li>
-                <li className="breadcrumbs__item">
-                  <a className="breadcrumbs__link">Add review</a>
-                </li>
-              </ul>
-            </nav>
-
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-                </div>
-              </li>
-              <li className="user-block__item">
-                <a className="user-block__link">Sign out</a>
-              </li>
-            </ul>
-          </header>
-
-          <div className="film-card__poster film-card__poster--small">
-            <img src={currentFilm.srcImg} alt={`${currentFilm.filmName} poster`} width="218" height="327"/>
+          <div className="add-review">
+            <AddComment/>
           </div>
-        </div>
-
-        <div className="add-review">
-          <AddComment/>
-        </div>
-      </section>
+        </section>
+      </Wrapper>
     );
   }
 }

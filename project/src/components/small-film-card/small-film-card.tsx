@@ -1,13 +1,30 @@
-import {useState,MouseEvent} from 'react';
+import React, {useState,MouseEvent} from 'react';
 import {Link} from 'react-router-dom';
+import VideoPlayer from '../video-player/video-player';
 type SmallFilmCardProps = {
 filmName : string;
 srcImg : string;
 id: string;
+player: string;
 }
 
+
 function SmallFilmCard(props: SmallFilmCardProps) {
-  const [, setActiveFilmId] = useState('');
+  const [activeFilmId, setActiveFilmId] = useState('');
+  const [renderVideo, setRenderVideo] = useState(false);
+  React.useEffect(() => {
+    if (activeFilmId){
+      const timer = setTimeout(() => {
+        setRenderVideo(true);
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+    else {
+      setRenderVideo(false);
+    }
+
+  }, [activeFilmId]);
+
   return(
     <article className="small-film-card catalog__films-card"
       onMouseOver={({target}: MouseEvent<HTMLInputElement>) => {
@@ -18,7 +35,7 @@ function SmallFilmCard(props: SmallFilmCardProps) {
       }}
     >
       <div className="small-film-card__image" >
-        <img src={props.srcImg} alt={props.filmName} width="280" height="175"/>
+        <VideoPlayer renderVideo = {renderVideo}activeId={activeFilmId} src={props.player} muted poster={props.srcImg}/>
       </div>
       <h3 className="small-film-card__title">
         <Link className="small-film-card__link" to={`/films/${props.id}`} relative='path'>{props.filmName}</Link>
@@ -26,6 +43,5 @@ function SmallFilmCard(props: SmallFilmCardProps) {
     </article>
   );
 }
-
 
 export default SmallFilmCard;

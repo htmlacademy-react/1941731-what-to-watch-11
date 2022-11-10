@@ -14,6 +14,7 @@ function FilmList({films} : FilmListProps): JSX.Element {
     <div className="catalog__films-list">
       {films.map((film) => (
         <SmallFilmCard
+          player={film.player}
           key ={film.id}
           filmName={film.filmName}
           srcImg={film.srcImg}
