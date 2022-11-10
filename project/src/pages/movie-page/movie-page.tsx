@@ -1,11 +1,11 @@
 import React from 'react';
+import {useParams, Link} from 'react-router-dom';
 import { Films} from '../../types/films';
 import FilmList from '../../components/film-list/film-list';
-import {useParams} from 'react-router-dom';
-import {Link} from 'react-router-dom';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import UserBlock from '../../components/user-block/user-block';
+import Wrapper from '../../components/wrapper/wrapper';
 
 type MoviePageProps = {
   films: Films;
@@ -18,7 +18,7 @@ function MoviePage({films} : MoviePageProps): JSX.Element | null {
   if (currentFilm === undefined) {return (null);}
   {
     return (
-      <div>
+      <Wrapper>
         <section className="film-card film-card--full">
           <div className="film-card__hero">
             <div className="film-card__bg">
@@ -110,7 +110,7 @@ function MoviePage({films} : MoviePageProps): JSX.Element | null {
           <Footer/>
 
         </div>
-      </div>
+      </Wrapper>
     );
   }
 }

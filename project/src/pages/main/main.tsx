@@ -1,11 +1,12 @@
-import {Films} from '../../types/films';
 import React from 'react';
+import {Films} from '../../types/films';
 import FilmList from '../../components/film-list/film-list';
 import Footer from '../../components/footer/footer';
 import GenreList from '../../components/genres-list/genre-list';
 import {Genres} from '../../const';
 import Header from '../../components/header/header';
 import UserBlock from '../../components/user-block/user-block';
+import Wrapper from '../../components/wrapper/wrapper';
 
 
 type MainProps = {
@@ -15,7 +16,7 @@ type MainProps = {
 function Main({films} : MainProps): JSX.Element {
 
   return (
-    <React.Fragment>
+    <Wrapper>
       <section className="film-card">
         <div className="film-card__bg">
           <img src={films[0].backgroundSrc} alt={films[0].filmName}/>
@@ -76,7 +77,7 @@ function Main({films} : MainProps): JSX.Element {
 
         <Footer/>
       </div>
-    </React.Fragment>
+    </Wrapper>
   );
 }
 
