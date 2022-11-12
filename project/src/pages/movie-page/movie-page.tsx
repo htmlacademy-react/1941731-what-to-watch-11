@@ -6,6 +6,7 @@ import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import UserBlock from '../../components/user-block/user-block';
 import Wrapper from '../../components/wrapper/wrapper';
+import MoviePageTabs from '../../components/movie-page-tabs/movie-page-tabs';
 
 type MoviePageProps = {
   films: Films;
@@ -63,38 +64,7 @@ function MoviePage({films} : MoviePageProps): JSX.Element | null {
                 <img src={currentFilm.posterSrc} alt={`${currentFilm.filmName} poster`} width="218" height="327"/>
               </div>
 
-              <div className="film-card__desc">
-                <nav className="film-nav film-card__nav">
-                  <ul className="film-nav__list">
-                    <li className="film-nav__item film-nav__item--active">
-                      <a href="#" className="film-nav__link">Overview</a>
-                    </li>
-                    <li className="film-nav__item">
-                      <a href="#" className="film-nav__link">Details</a>
-                    </li>
-                    <li className="film-nav__item">
-                      <a href="#" className="film-nav__link">Reviews</a>
-                    </li>
-                  </ul>
-                </nav>
-
-                <div className="film-rating">
-                  <div className="film-rating__score">{currentFilm.overview.rating.score}</div>
-                  <p className="film-rating__meta">
-                    <span className="film-rating__level">{currentFilm.overview.rating.result}</span>
-                    <span className="film-rating__count">{currentFilm.overview.rating.amountOfReviews}</span>
-                  </p>
-                </div>
-
-                <div className="film-card__text">
-                  <p>
-                    {currentFilm.overview.description}
-                  </p>
-                  <p className="film-card__director"><strong>{currentFilm.overview.director}</strong></p>
-
-                  <p className="film-card__starring"><strong>{currentFilm.overview.starring}</strong></p>
-                </div>
-              </div>
+              <MoviePageTabs currentFilm={currentFilm}/>
             </div>
           </div>
         </section>

@@ -4,15 +4,12 @@ type PlayerProps = {
   src: string;
   muted: boolean;
   poster: string;
-  activeId: string;
+  isActive: boolean;
   renderVideo: boolean;
 }
 
 function VideoPlayer(props: PlayerProps) {
-  // useEffect(() => {
-  //
-  // });
-  if (props.activeId === '' || props.renderVideo === false){
+  if (!props.isActive || !props.renderVideo){
     return (
       <div className="small-film-card__image">
         <img src={props.poster} alt="Fantastic Beasts: The Crimes of Grindelwald"

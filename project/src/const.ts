@@ -26,5 +26,10 @@ export const Genres = [
   'Sci - Fi',
   'Thrillers',
 ];
+export const TABS =
+  {firstTab: 'Overview',
+    secondTab:'Details',
+    thirdTab:'Reviews'};
 
 export const AMOUNT_OF_STARS = 10;
+export const AMOUNT_OF_OVERVIEW_ACTORS = 3;

@@ -10,10 +10,10 @@ player: string;
 
 
 function SmallFilmCard(props: SmallFilmCardProps) {
-  const [activeFilmId, setActiveFilmId] = useState('');
+  const [isActive, setIsActive] = useState(false);
   const [renderVideo, setRenderVideo] = useState(false);
   React.useEffect(() => {
-    if (activeFilmId){
+    if (isActive){
       const timer = setTimeout(() => {
         setRenderVideo(true);
       }, 1000);
@@ -23,19 +23,19 @@ function SmallFilmCard(props: SmallFilmCardProps) {
       setRenderVideo(false);
     }
 
-  }, [activeFilmId]);
+  }, [isActive]);
 
   return(
     <article className="small-film-card catalog__films-card"
       onMouseOver={({target}: MouseEvent<HTMLInputElement>) => {
-        setActiveFilmId(props.id);
+        setIsActive(true);
       }}
       onMouseLeave={({target}: MouseEvent<HTMLInputElement>) => {
-        setActiveFilmId('');
+        setIsActive(false);
       }}
     >
       <div className="small-film-card__image" >
-        <VideoPlayer renderVideo = {renderVideo}activeId={activeFilmId} src={props.player} muted poster={props.srcImg}/>
+        <VideoPlayer renderVideo = {renderVideo} isActive={isActive} src={props.player} muted poster={props.srcImg}/>
       </div>
       <h3 className="small-film-card__title">
         <Link className="small-film-card__link" to={`/films/${props.id}`} relative='path'>{props.filmName}</Link>
