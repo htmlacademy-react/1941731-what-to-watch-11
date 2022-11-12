@@ -1,12 +1,12 @@
 import React from 'react';
 import {useParams, Link} from 'react-router-dom';
 import { Films} from '../../types/films';
-import FilmList from '../../components/film-list/film-list';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import UserBlock from '../../components/user-block/user-block';
 import Wrapper from '../../components/wrapper/wrapper';
 import MoviePageTabs from '../../components/movie-page-tabs/movie-page-tabs';
+import SimilarFilmList from '../../components/SimilarFilmList/SimilarFilmList';
 
 type MoviePageProps = {
   films: Films;
@@ -72,9 +72,7 @@ function MoviePage({films} : MoviePageProps): JSX.Element | null {
         <div className="page-content">
           <section className="catalog catalog--like-this">
             <h2 className="catalog__title">More like this</h2>
-
-            <FilmList films={films}/>
-
+            <SimilarFilmList currentFilm={currentFilm}/>
           </section>
 
           <Footer/>

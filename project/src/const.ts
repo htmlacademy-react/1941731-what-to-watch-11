@@ -33,3 +33,4 @@ export const TABS =
 
 export const AMOUNT_OF_STARS = 10;
 export const AMOUNT_OF_OVERVIEW_ACTORS = 3;
+export const MAX_SIMILAR_FILMS = 4;
