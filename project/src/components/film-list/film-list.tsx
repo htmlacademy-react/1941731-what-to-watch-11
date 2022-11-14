@@ -1,6 +1,7 @@
 
 import SmallFilmCard from '../../components/small-film-card/small-film-card';
 import {Films} from '../../types/films';
+import {MAX_SHOWN_FILMS} from '../../const';
 
 
 type FilmListProps = {
@@ -9,16 +10,13 @@ type FilmListProps = {
 
 function FilmList({films} : FilmListProps): JSX.Element {
 
-
+  const shownFilms = films.slice(0,MAX_SHOWN_FILMS);
   return(
     <div className="catalog__films-list">
-      {films.map((film) => (
+      {shownFilms.map((film) => (
         <SmallFilmCard
-          player={film.player}
+          currentFilm={film}
           key ={film.id}
-          filmName={film.filmName}
-          srcImg={film.srcImg}
-          id={film.id}
         />
       ))}
     </div>

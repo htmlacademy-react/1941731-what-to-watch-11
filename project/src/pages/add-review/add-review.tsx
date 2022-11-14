@@ -13,7 +13,7 @@ type AddReviewProps = {
 }
 function AddReview({films} : AddReviewProps): JSX.Element | null {
   const params = useParams();
-  const currentFilm = films.find((film) => film.id === params.id);
+  const currentFilm = films.find((film) => film.id.toString() === params.id);
   if (currentFilm === undefined) {return (null);}
   {
     return (
@@ -21,18 +21,18 @@ function AddReview({films} : AddReviewProps): JSX.Element | null {
         <section className="film-card film-card--full">
           <div className="film-card__header">
             <div className="film-card__bg">
-              <img src={films[0].backgroundSrc} alt={films[0].filmName}/>
+              <img src={films[0].backgroundImage} alt={films[0].name}/>
             </div>
 
             <h1 className="visually-hidden">WTW</h1>
 
             <Header>
-              <Breadcrumbs id={currentFilm.id} filmName={currentFilm.filmName}/>
+              <Breadcrumbs id={currentFilm.id} filmName={currentFilm.name}/>
               <UserBlock/>
             </Header>
 
             <div className="film-card__poster film-card__poster--small">
-              <img src={currentFilm.srcImg} alt={`${currentFilm.filmName} poster`} width="218" height="327"/>
+              <img src={currentFilm.posterImage} alt={`${currentFilm.name} poster`} width="218" height="327"/>
             </div>
           </div>
 

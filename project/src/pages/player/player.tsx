@@ -8,7 +8,7 @@ type PlayerProps = {
 }
 function Player({films} : PlayerProps): JSX.Element | null{
   const params = useParams();
-  const currentFilm = films.find((film) => film.id === params.id);
+  const currentFilm = films.find((film) => film.id.toString() === params.id);
 
   if (currentFilm === undefined) {return (null);}
   else{
@@ -35,7 +35,7 @@ function Player({films} : PlayerProps): JSX.Element | null{
                 </svg>
                 <span>Play</span>
               </button>
-              <div className="player__name">{currentFilm.filmName}</div>
+              <div className="player__name">{currentFilm.name}</div>
 
               <button type="button" className="player__full-screen">
                 <svg viewBox="0 0 27 27" width="27" height="27">
