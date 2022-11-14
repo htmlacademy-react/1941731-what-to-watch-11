@@ -4,9 +4,11 @@ import {Film} from '../../types/films';
 import {Link} from 'react-router-dom';
 import classNames from 'classnames';
 import {TABS} from '../../const';
+import {Reviews} from '../../types/reviews';
 
 type MoviePageTabsProps = {
   currentFilm: Film;
+  reviews: Reviews;
 }
 
 function MoviePageTabs(props: MoviePageTabsProps): JSX.Element {
@@ -20,14 +22,14 @@ function MoviePageTabs(props: MoviePageTabsProps): JSX.Element {
             <Link onClick={({target}: MouseEvent<HTMLAnchorElement>) => {
               setActiveItem(TABS.firstTab);
             }} to={`/films/${props.currentFilm.id}`} className="film-nav__link"
-            >Details
+            >Overview
             </Link>
           </li>
           <li className={classNames('film-nav__item', {'film-nav__item--active':(activeItem === TABS.secondTab)})}>
             <Link onClick={({target}: MouseEvent<HTMLAnchorElement>) => {
               setActiveItem(TABS.secondTab);
             }} to={`/films/${props.currentFilm.id}`} className="film-nav__link"
-            >Overview
+            >Details
             </Link>
           </li>
           <li className={classNames('film-nav__item', {'film-nav__item--active':(activeItem === TABS.thirdTab)})}>
@@ -39,7 +41,7 @@ function MoviePageTabs(props: MoviePageTabsProps): JSX.Element {
           </li>
         </ul>
       </nav>
-      <CurrentTab activeItem={activeItem} currentFilm={props.currentFilm}/>
+      <CurrentTab activeItem={activeItem} currentFilm={props.currentFilm} reviews={props.reviews}/>
     </div>
   );
 }

@@ -6,24 +6,23 @@ type MoviePageDetailsProps = {
 }
 
 function MoviePageDetails(props: MoviePageDetailsProps) {
-
-  function renderActor(actor:string){
-    return (<React.Fragment> {actor}<br/> </React.Fragment>);
+  function getRunTime(runTime: number){
+    return `${Math.floor(runTime / 60)}h ${runTime % 60}m`;
   }
+
   return(
     <div className="film-card__text film-card__row">
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Director</strong>
-          <span className="film-card__details-value">{props.currentFilm.overview.director}</span>
+          <span className="film-card__details-value">{props.currentFilm.director}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Starring</strong>
           <span className="film-card__details-value">
-            {props.currentFilm.overview.starring.map((actor) =>(
-              renderActor(actor)
+            {props.currentFilm.starring.map((actor) =>(
+              <React.Fragment key={actor}> {actor}<br/> </React.Fragment>
             ))}
-
           </span>
         </p>
       </div>
@@ -31,7 +30,7 @@ function MoviePageDetails(props: MoviePageDetailsProps) {
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Run Time</strong>
-          <span className="film-card__details-value">{props.currentFilm.runTime}</span>
+          <span className="film-card__details-value">{getRunTime(props.currentFilm.runTime)}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Genre</strong>
@@ -39,7 +38,7 @@ function MoviePageDetails(props: MoviePageDetailsProps) {
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Released</strong>
-          <span className="film-card__details-value">{props.currentFilm.date}</span>
+          <span className="film-card__details-value">{props.currentFilm.released}</span>
         </p>
       </div>
     </div>

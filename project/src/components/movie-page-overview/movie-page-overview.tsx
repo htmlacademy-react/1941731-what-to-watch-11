@@ -1,35 +1,38 @@
 import React from 'react';
 import Wrapper from '../wrapper/wrapper';
-import {FilmOverview} from '../../types/films';
 import {AMOUNT_OF_OVERVIEW_ACTORS} from '../../const';
+import {Film} from '../../types/films';
 
 
 type MoviePageOverviewProps = {
-  overview: FilmOverview;
+  currentFilm: Film;
 }
-
 function MoviePageOverview(props: MoviePageOverviewProps) {
-  let shownActors = '';
-  for (let i = 0; i < AMOUNT_OF_OVERVIEW_ACTORS; i++){
-    shownActors += `${props.overview.starring[i]} `;
+  function getFilmRatingLevel(filmRating: number){
+    if (filmRating <= 3){return 'Bad';}
+    if (filmRating <= 5){return 'Normal';}
+    if (filmRating <= 8){return 'Good';}
+    if (filmRating < 10){return 'Very good';}
+    if (filmRating === 10){return 'Awesome';}
   }
+  const shownActors = props.currentFilm.starring.slice(0,AMOUNT_OF_OVERVIEW_ACTORS);
   return(
     <Wrapper>
       <div className="film-rating">
-        <div className="film-rating__score">{props.overview.rating.score}</div>
+        <div className="film-rating__score">{props.currentFilm.rating}</div>
         <p className="film-rating__meta">
-          <span className="film-rating__level">{props.overview.rating.result}</span>
-          <span className="film-rating__count">{props.overview.rating.amountOfReviews}</span>
+          <span className="film-rating__level">{getFilmRatingLevel(props.currentFilm.rating)}</span>
+          <span className="film-rating__count">{props.currentFilm.scoresCount}</span>
         </p>
       </div>
 
       <div className="film-card__text">
         <p>
-          {props.overview.description}
+          {props.currentFilm.description}
         </p>
-        <p className="film-card__director"><strong>{props.overview.director}</strong></p>
+        <p className="film-card__director"><strong>{props.currentFilm.director}</strong></p>
 
-        <p className="film-card__starring"><strong>{`${shownActors} and others`}</strong></p>
+        <p className="film-card__starring"><strong>{`${shownActors.join(', ')} and others`}</strong></p>
       </div>
     </Wrapper>
   );

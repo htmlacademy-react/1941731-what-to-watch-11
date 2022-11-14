@@ -1,16 +1,16 @@
 import React from 'react';
-import {filmReview} from '../../types/films';
+import {Review} from '../../types/reviews';
 type ReviewProps = {
-  review: filmReview;
+  review: Review;
 }
-function Review(props: ReviewProps) {
+function ReviewItem(props: ReviewProps) {
   return(
     <div className="review">
       <blockquote className="review__quote">
-        <p className="review__text">{props.review.text}
+        <p className="review__text">{props.review.comment}
         </p>
         <footer className="review__details">
-          <cite className="review__author">{props.review.author}</cite>
+          <cite className="review__author">{props.review.user.name}</cite>
           <time className="review__date" dateTime="2016-12-24">{props.review.date}</time>
         </footer>
       </blockquote>
@@ -19,4 +19,4 @@ function Review(props: ReviewProps) {
     </div>
   );
 }
-export default Review;
+export default ReviewItem;

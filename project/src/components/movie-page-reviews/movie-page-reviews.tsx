@@ -1,10 +1,10 @@
-import {filmReviews} from '../../types/films';
+import {Reviews} from '../../types/reviews';
 import React from 'react';
 import Review from '../review/review';
 
 
 type MoviePageReviewsProps = {
-  reviews: filmReviews;
+  reviews: Reviews;
 }
 
 function MoviePageReviews(props: MoviePageReviewsProps) {

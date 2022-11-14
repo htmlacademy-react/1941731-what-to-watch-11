@@ -1,11 +1,9 @@
 import React, {useState,MouseEvent} from 'react';
 import {Link} from 'react-router-dom';
 import VideoPlayer from '../video-player/video-player';
+import {Film} from '../../types/films';
 type SmallFilmCardProps = {
-filmName : string;
-srcImg : string;
-id: string;
-player: string;
+currentFilm: Film;
 }
 
 
@@ -35,10 +33,10 @@ function SmallFilmCard(props: SmallFilmCardProps) {
       }}
     >
       <div className="small-film-card__image" >
-        <VideoPlayer renderVideo = {renderVideo} isActive={isActive} src={props.player} muted poster={props.srcImg}/>
+        <VideoPlayer renderVideo = {renderVideo} isActive={isActive} src={props.currentFilm.videoLink} muted poster={props.currentFilm.previewImage}/>
       </div>
       <h3 className="small-film-card__title">
-        <Link className="small-film-card__link" to={`/films/${props.id}`} relative='path'>{props.filmName}</Link>
+        <Link className="small-film-card__link" to={`/films/${props.currentFilm.id}`} relative='path'>{props.currentFilm.name}</Link>
       </h3>
     </article>
   );
