@@ -1,5 +1,5 @@
 import SmallFilmCard from '../../components/small-film-card/small-film-card';
-import {Film} from '../../types/films';
+import {Film, Films} from '../../types/films';
 import {films} from '../../mocks/films';
 import React, {useMemo} from 'react';
 import {MAX_SIMILAR_FILMS} from '../../const';
@@ -10,12 +10,16 @@ type SimilarFilmListProps = {
 
 function SimilarFilmList({currentFilm} : SimilarFilmListProps): JSX.Element {
   function getSimilarFilms(film: Film){
-    if(film.genre === currentFilm.genre && currentFilm.id !== film.id){
+    if(film.genre === currentFilm.genre){
       return film;
     }
   }
-  const similarFilms = useMemo(() => films.filter(getSimilarFilms), [getSimilarFilms]);
-  const shownSimilarFilms = similarFilms.slice(0, MAX_SIMILAR_FILMS);
+  function getShownSimilarFilms(similarFilms: Films){
+    const shownSimilarFilms = similarFilms.filter((film) => film.id !== currentFilm.id);
+    return shownSimilarFilms.slice(0, MAX_SIMILAR_FILMS);
+  }
+  const similarFilms = useMemo(() => films.filter(getSimilarFilms),[currentFilm.genre]);
+  const shownSimilarFilms = getShownSimilarFilms(similarFilms);
   return(
     <div className="catalog__films-list">
       {shownSimilarFilms.map((film) => (

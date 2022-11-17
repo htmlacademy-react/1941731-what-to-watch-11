@@ -5,8 +5,6 @@ type GenreListProps = {
 }
 
 function GenreList({genres} : GenreListProps): JSX.Element {
-
-
   return(
     <ul className="catalog__genres-list">
       {genres.map((genre) => (
