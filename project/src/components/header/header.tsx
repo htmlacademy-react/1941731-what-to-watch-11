@@ -5,7 +5,6 @@ type HeaderPropsType = {
   children?:ReactNode;
 }
 function Header(props: HeaderPropsType) {
-
   return(
     <header className={`page-header ${props.additionalClass || ''}`}>
       <HeaderLogo/>

@@ -3,7 +3,6 @@ import {Films} from '../../types/films';
 import FilmList from '../../components/film-list/film-list';
 import Footer from '../../components/footer/footer';
 import GenreList from '../../components/genres-list/genre-list';
-import {Genres} from '../../const';
 import Header from '../../components/header/header';
 import UserBlock from '../../components/user-block/user-block';
 import Wrapper from '../../components/wrapper/wrapper';
@@ -66,7 +65,7 @@ function Main({films} : MainProps): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenreList genres={Genres}/>
+          <GenreList films={films}/>
 
           <FilmList films = {films}/>
 

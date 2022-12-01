@@ -1,12 +1,18 @@
 import Genre from '../genre/genre';
+import {Films} from '../../types/films';
 
 type GenreListProps = {
-  genres : string[];
+  films : Films;
 }
 
-function GenreList({genres} : GenreListProps): JSX.Element {
+function GenreList({films} : GenreListProps): JSX.Element {
+  const genres = ['All genres'];
 
-
+  films.forEach((film) => {
+    if (!genres.includes(film.genre)){
+      genres.push(film.genre);
+    }
+  });
   return(
     <ul className="catalog__genres-list">
       {genres.map((genre) => (
