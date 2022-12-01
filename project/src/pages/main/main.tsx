@@ -6,6 +6,9 @@ import GenreList from '../../components/genres-list/genre-list';
 import Header from '../../components/header/header';
 import UserBlock from '../../components/user-block/user-block';
 import Wrapper from '../../components/wrapper/wrapper';
+import ShowMore from '../../components/show-more/show-more';
+import {showDefaultFilmList} from '../../store/action';
+import {store} from '../../store';
 
 
 type MainProps = {
@@ -13,7 +16,7 @@ type MainProps = {
 }
 
 function Main({films} : MainProps): JSX.Element {
-
+  store.dispatch(showDefaultFilmList());
   return (
     <Wrapper>
       <section className="film-card">
@@ -69,9 +72,7 @@ function Main({films} : MainProps): JSX.Element {
 
           <FilmList films = {films}/>
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          <ShowMore amountOfFilms={films.length}/>
         </section>
 
         <Footer/>

@@ -5,3 +5,7 @@ export const genreChange = createAction('filmList/genreChange', (currentGenre:st
   payload: currentGenre
 }));
 export const getFilmList = createAction('filmList/getFilmList');
+
+export const showMoreFilms = createAction('filmList/showMoreFilms');
+
+export const showDefaultFilmList = createAction('filmList/showDefaultFilmList');
