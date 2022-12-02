@@ -15,14 +15,13 @@ function Genre(props: GenreProps) {
     <li className="catalog__genres-item catalog__genres-item">
       <Link to={AppRoute.Main} className="catalog__genres-link"
         onClick={() => {
+          dispatch(genreChange(props.genreName));
           if (props.genreName === 'All genres'){
             dispatch(getInitialFilmList());
           } else {
             dispatch(getFilmList());
           }
-          dispatch(genreChange(props.genreName));
           dispatch(showDefaultFilmList());
-
         }}
       >{props.genreName}
       </Link>

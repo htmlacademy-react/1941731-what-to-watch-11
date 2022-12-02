@@ -19,7 +19,7 @@ function ShowMore({films} : showMoreProps): JSX.Element {
     if (currentMaxShownFilms >= amountOfFilms){
       setShowMore(false);
     }
-  }, [amountOfFilms, currentMaxShownFilms]);
+  });
 
   return(
     <div className="catalog__more">
