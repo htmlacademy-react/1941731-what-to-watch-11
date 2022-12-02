@@ -72,7 +72,7 @@ function Main({films} : MainProps): JSX.Element {
 
           <FilmList films = {films}/>
 
-          <ShowMore amountOfFilms={films.length}/>
+          <ShowMore films={films}/>
         </section>
 
         <Footer/>

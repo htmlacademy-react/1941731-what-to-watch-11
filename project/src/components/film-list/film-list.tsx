@@ -11,7 +11,6 @@ function FilmList({films} : FilmListProps): JSX.Element {
   const currentGenre = useAppSelector((state) => state.currentGenre);
   const currentMaxShownFilms = useAppSelector((state) => state.maxShownFilms);
 
-
   function getFilms(genre:string){
     if (genre === 'All genres'){
       return films;

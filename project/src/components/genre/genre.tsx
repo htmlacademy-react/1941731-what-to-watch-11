@@ -1,6 +1,6 @@
 import React from 'react';
 import {useAppDispatch} from '../../hooks';
-import {genreChange} from '../../store/action';
+import {genreChange, getFilmList, getInitialFilmList, showDefaultFilmList} from '../../store/action';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
 
@@ -15,7 +15,14 @@ function Genre(props: GenreProps) {
     <li className="catalog__genres-item catalog__genres-item">
       <Link to={AppRoute.Main} className="catalog__genres-link"
         onClick={() => {
+          if (props.genreName === 'All genres'){
+            dispatch(getInitialFilmList());
+          } else {
+            dispatch(getFilmList());
+          }
           dispatch(genreChange(props.genreName));
+          dispatch(showDefaultFilmList());
+
         }}
       >{props.genreName}
       </Link>
