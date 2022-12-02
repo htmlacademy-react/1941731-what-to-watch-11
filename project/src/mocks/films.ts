@@ -454,7 +454,7 @@ export const films: Films = [
       'Elizabeth McGovern'
     ],
     'runTime': 229,
-    'genre': 'Crime',
+    'genre': 'Drama',
     'released': 1984,
     'id': 20,
     'isFavorite': false,
@@ -477,7 +477,7 @@ export const films: Films = [
       'BD Wong'
     ],
     'runTime': 136,
-    'genre': 'Adventure',
+    'genre': 'Drama',
     'released': 1997,
     'id': 21,
     'isFavorite': false,
@@ -546,7 +546,7 @@ export const films: Films = [
       'Jason Schwartzman'
     ],
     'runTime': 91,
-    'genre': 'Adventure',
+    'genre': 'Drama',
     'released': 2007,
     'id': 24,
     'isFavorite': false,
@@ -569,7 +569,7 @@ export const films: Films = [
       'Natalie Imbruglia'
     ],
     'runTime': 88,
-    'genre': 'Comedy',
+    'genre': 'Drama',
     'released': 2003,
     'id': 25,
     'isFavorite': false,
