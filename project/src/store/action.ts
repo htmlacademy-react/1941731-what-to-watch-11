@@ -1,5 +1,5 @@
 import {createAction} from '@reduxjs/toolkit';
-import {Films} from '../types/films';
+import {Films, Film} from '../types/films';
 import {AuthorizationStatus} from '../const';
 
 export const genreChange = createAction('filmList/genreChange', (currentGenre:string) => ({
@@ -14,6 +14,8 @@ export const showMoreFilms = createAction('filmList/showMoreFilms');
 export const showDefaultAmountOfFilms = createAction('filmList/showDefaultFilmList');
 
 export const loadFilms = createAction<Films>('data/loadFilms');
+
+export const loadPromo = createAction<Film>('data/loadPromo');
 
 export const setFilmsDataLoadingStatus = createAction<boolean>('data/setQuestionsDataLoadingStatus');
 

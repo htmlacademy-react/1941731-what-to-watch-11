@@ -10,24 +10,26 @@ import {
   loadFilms,
   requireAuthorization,
   setError,
-  setFilmsDataLoadingStatus
+  setFilmsDataLoadingStatus, loadPromo
 } from './action';
 import {MAX_SHOWN_FILMS, AuthorizationStatus} from '../const';
 
-type initialState = {
+type InitialState = {
   currentGenre: string;
   maxShownFilms: number;
   films: Films;
   shownFilms: Films;
+  promo: Film;
   reviews: Reviews;
   authorizationStatus: AuthorizationStatus;
   isFilmsDataLoading: boolean;
   error: string | null;
 };
-const initialState: initialState = {
+const initialState: InitialState = {
   currentGenre: 'All genres',
   maxShownFilms: MAX_SHOWN_FILMS,
   films: [],
+  promo: {} as Film,
   shownFilms: [],
   reviews: [],
   authorizationStatus: AuthorizationStatus.Unknown,
@@ -38,6 +40,9 @@ const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(loadFilms, (state, action) => {
       state.films = action.payload;
+    })
+    .addCase(loadPromo, (state, action) => {
+      state.promo = action.payload;
     })
     .addCase(getFilmList, (state) => {
       state.shownFilms = state.films.filter((film: Film) => film.genre === state.currentGenre);

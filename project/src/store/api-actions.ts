@@ -1,8 +1,15 @@
 import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, State} from '../types/state.js';
-import {Films} from '../types/films';
-import {getInitialFilms, loadFilms, requireAuthorization, setError, setFilmsDataLoadingStatus} from './action';
+import {Films, Film} from '../types/films';
+import {
+  getInitialFilms,
+  loadFilms,
+  loadPromo,
+  requireAuthorization,
+  setError,
+  setFilmsDataLoadingStatus
+} from './action';
 import {saveToken, dropToken} from '../services/token';
 import {APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR} from '../const';
 import {AuthData} from '../types/auth-data';
@@ -10,7 +17,7 @@ import {UserData} from '../types/user-data';
 import {store} from './';
 
 export const clearErrorAction = createAsyncThunk(
-  'game/clearError',
+  'app/clearError',
   () => {
     setTimeout(
       () => store.dispatch(setError(null)),
@@ -31,6 +38,18 @@ export const fetchFilmsAction = createAsyncThunk<void, undefined, {
     dispatch(setFilmsDataLoadingStatus(false));
     dispatch(loadFilms(data));
     dispatch(getInitialFilms());
+  },
+);
+
+export const fetchPromoAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchPromo',
+  async (_arg, {dispatch, extra: api}) => {
+    const {data} = await api.get<Film>(APIRoute.PromoFilm);
+    dispatch(loadPromo(data));
   },
 );
 
