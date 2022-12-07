@@ -17,7 +17,7 @@ import {UserData} from '../types/user-data';
 import {store} from './';
 
 export const clearErrorAction = createAsyncThunk(
-  'game/clearError',
+  'app/clearError',
   () => {
     setTimeout(
       () => store.dispatch(setError(null)),

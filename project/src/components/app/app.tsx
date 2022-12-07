@@ -31,9 +31,7 @@ function App(): JSX.Element{
           <Route path ={AppRoute.SignIn} element={<SignIn/>}/>
           <Route path={AppRoute.MoviePage} element={<MoviePage />} />
           <Route path ={AppRoute.MyList} element={
-            <PrivateRoute
-              authorizationStatus={AuthorizationStatus.NoAuth}
-            >
+            <PrivateRoute >
               <MyList />
             </PrivateRoute>
           }
