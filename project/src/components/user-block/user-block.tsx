@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
@@ -6,12 +6,15 @@ import {logoutAction} from '../../store/api-actions';
 
 
 function UserBlock() {
-  let isLogged = false;
+  const [isLogged, setIsLogged] = useState(false);
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
-  if (authorizationStatus === 'AUTH'){
-    isLogged = true;
-  }
+  React.useEffect(() => {
+    setIsLogged(false);
+    if (authorizationStatus === 'AUTH'){
+      setIsLogged(true);
+    }
+  }, [authorizationStatus]);
   const dispatch = useAppDispatch();
 
   return(
@@ -32,7 +35,7 @@ function UserBlock() {
           >Sign out
           </a>
           :
-          <Link to={AppRoute.SignIn} className="user-block__link">{'Sign in'}</Link>}
+          <Link to={AppRoute.SignIn} className="user-block__link">Sign in</Link>}
       </li>
     </ul>
   );

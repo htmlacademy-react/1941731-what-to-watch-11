@@ -1,6 +1,7 @@
 import {createAction} from '@reduxjs/toolkit';
 import {Films, Film} from '../types/films';
-import {AuthorizationStatus} from '../const';
+import {AuthorizationStatus, AppRoute} from '../const';
+
 
 export const genreChange = createAction('filmList/genreChange', (currentGenre:string) => ({
   payload: currentGenre
@@ -17,8 +18,12 @@ export const loadFilms = createAction<Films>('data/loadFilms');
 
 export const loadPromo = createAction<Film>('data/loadPromo');
 
+export const loadFilmInfo = createAction('data/filmInfo');
+
 export const setFilmsDataLoadingStatus = createAction<boolean>('data/setQuestionsDataLoadingStatus');
 
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 
-export const setError = createAction<string | null>('game/setError');
+export const setError = createAction<string | null>('app/setError');
+
+export const redirectToRoute = createAction<AppRoute>('app/redirectToRoute');
