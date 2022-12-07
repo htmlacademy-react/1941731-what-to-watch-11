@@ -1,14 +1,15 @@
 import SmallFilmCard from '../../components/small-film-card/small-film-card';
 import {Film, Films} from '../../types/films';
-import {films} from '../../mocks/films';
 import React, {useMemo} from 'react';
 import {MAX_SIMILAR_FILMS} from '../../const';
+import {useAppSelector} from '../../hooks';
 
 type SimilarFilmListProps = {
   currentFilm: Film;
 }
 
 function SimilarFilmList({currentFilm} : SimilarFilmListProps): JSX.Element {
+  const films = useAppSelector((state) => state.films);
   function getSimilarFilms(film: Film){
     if(film.genre === currentFilm.genre){
       return film;

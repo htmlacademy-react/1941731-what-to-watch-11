@@ -1,22 +1,20 @@
 import React from 'react';
 import {useParams, Link} from 'react-router-dom';
-import { Films} from '../../types/films';
+
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import UserBlock from '../../components/user-block/user-block';
 import Wrapper from '../../components/wrapper/wrapper';
 import MoviePageTabs from '../../components/movie-page-tabs/movie-page-tabs';
-import {Reviews} from '../../types/reviews';
 import SimilarFilmList from '../../components/similar-film-list/similar-film-list';
+import {useAppSelector} from '../../hooks';
 
-type MoviePageProps = {
-  films: Films;
-  reviews: Reviews;
-}
 
-function MoviePage(props : MoviePageProps): JSX.Element | null {
+function MoviePage(): JSX.Element | null {
   const params = useParams();
-  const currentFilm = props.films.find((film) => film.id.toString() === params.id);
+  const films = useAppSelector((state) => state.films);
+  const reviews = useAppSelector((state) => state.reviews);
+  const currentFilm = films.find((film) => film.id.toString() === params.id);
 
   if (currentFilm === undefined) {return (null);}
   {
@@ -66,7 +64,7 @@ function MoviePage(props : MoviePageProps): JSX.Element | null {
                 <img src={currentFilm.posterImage} alt={`${currentFilm.name} poster`} width="218" height="327"/>
               </div>
 
-              <MoviePageTabs currentFilm={currentFilm} reviews={props.reviews}/>
+              <MoviePageTabs currentFilm={currentFilm} reviews={reviews}/>
             </div>
           </div>
         </section>

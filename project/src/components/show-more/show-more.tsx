@@ -10,15 +10,19 @@ type showMoreProps = {
 
 function ShowMore({films} : showMoreProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const [showMore, setShowMore] = useState(true);
   const currentMaxShownFilms = useAppSelector((state) => state.maxShownFilms);
-  const amountOfFilms = useAppSelector((state) => state.filmList.length);
+  const amountOfFilms = useAppSelector((state) => state.shownFilms.length);
 
-  React.useEffect(() => {
-    setShowMore(true);
+  function getShowMore() {
+    let isShown = true;
     if (currentMaxShownFilms >= amountOfFilms){
-      setShowMore(false);
+      isShown = false;
     }
+    return isShown;
+  }
+  const [showMore, setShowMore] = useState(getShowMore);
+  React.useEffect(() => {
+    setShowMore(getShowMore());
   });
 
   return(

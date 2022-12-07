@@ -16,14 +16,11 @@ function GenreList({films} : GenreListProps): JSX.Element {
     });
     return genreList;
   }
-  const [genres, setGenres] = useState(() => {
-    const initialState = getGenres();
-    return initialState;
-  });
+  const [genres, setGenres] = useState(getGenres);
 
   React.useEffect(() => {
     setGenres(getGenres());
-  }, [films]);
+  }, []);
 
   return(
     <ul className="catalog__genres-list">
