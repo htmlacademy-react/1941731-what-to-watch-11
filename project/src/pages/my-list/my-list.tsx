@@ -1,17 +1,14 @@
 import React from 'react';
-import {Films} from '../../types/films';
 
 import FilmList from '../../components/film-list/film-list';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import Wrapper from '../../components/wrapper/wrapper';
+import {useAppSelector} from '../../hooks';
 
 
-type MyListProps = {
-  films: Films;
-}
-
-function MyList({films} : MyListProps): JSX.Element {
+function MyList(): JSX.Element {
+  const films = useAppSelector((state) => state.films);
   return (
     <Wrapper>
       <div className="user-page">

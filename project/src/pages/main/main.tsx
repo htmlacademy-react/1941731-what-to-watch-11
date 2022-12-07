@@ -1,5 +1,4 @@
 import React from 'react';
-import {Films} from '../../types/films';
 import FilmList from '../../components/film-list/film-list';
 import Footer from '../../components/footer/footer';
 import GenreList from '../../components/genres-list/genre-list';
@@ -7,16 +6,14 @@ import Header from '../../components/header/header';
 import UserBlock from '../../components/user-block/user-block';
 import Wrapper from '../../components/wrapper/wrapper';
 import ShowMore from '../../components/show-more/show-more';
-import {showDefaultFilmList} from '../../store/action';
+import {showDefaultAmountOfFilms} from '../../store/action';
 import {store} from '../../store';
+import {useAppSelector} from '../../hooks';
 
 
-type MainProps = {
-  films: Films;
-}
-
-function Main({films} : MainProps): JSX.Element {
-  store.dispatch(showDefaultFilmList());
+function Main(): JSX.Element {
+  store.dispatch(showDefaultAmountOfFilms());
+  const films = useAppSelector((state) => state.films);
   return (
     <Wrapper>
       <section className="film-card">

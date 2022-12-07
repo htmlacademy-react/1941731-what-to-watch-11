@@ -1,13 +1,12 @@
 import React from 'react';
 import {useParams} from 'react-router-dom';
-import {Films} from '../../types/films';
 import Wrapper from '../../components/wrapper/wrapper';
+import {useAppSelector} from '../../hooks';
 
-type PlayerProps = {
-  films: Films;
-}
-function Player({films} : PlayerProps): JSX.Element | null{
+
+function Player(): JSX.Element | null{
   const params = useParams();
+  const films = useAppSelector((state) => state.films);
   const currentFilm = films.find((film) => film.id.toString() === params.id);
 
   if (currentFilm === undefined) {return (null);}

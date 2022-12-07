@@ -1,18 +1,17 @@
 import React from 'react';
 import {useParams} from 'react-router-dom';
 
-import {Films} from '../../types/films';
 import AddComment from '../../components/add-comment/add-comment';
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
 import Header from '../../components/header/header';
 import UserBlock from '../../components/user-block/user-block';
 import Wrapper from '../../components/wrapper/wrapper';
+import {useAppSelector} from '../../hooks';
 
-type AddReviewProps = {
-  films: Films;
-}
-function AddReview({films} : AddReviewProps): JSX.Element | null {
+
+function AddReview(): JSX.Element | null {
   const params = useParams();
+  const films = useAppSelector((state) => state.films);
   const currentFilm = films.find((film) => film.id.toString() === params.id);
   if (currentFilm === undefined) {return (null);}
   {

@@ -14,6 +14,19 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export enum APIRoute {
+  Films = '/films',
+  Film = '/films/{filmId}',
+  SimilarFilms = '/films/{filmId}/similar',
+  PromoFilm = '/promo',
+  Favourite ='/favorite',
+  FavouriteStatus ='/favorite/{filmId}/{status}',
+  Reviews = '/comments/{filmId}',
+  Login = '/login',
+  Logout = '/logout',
+}
+
+
 export const Genres = [
   'All genres',
   'Comedies',
@@ -36,3 +49,4 @@ export const AMOUNT_OF_OVERVIEW_ACTORS = 3;
 export const MAX_SIMILAR_FILMS = 4;
 export const MAX_SHOWN_FILMS = 8;
 export const MAX_GENRES = 10;
+export const TIMEOUT_SHOW_ERROR = 2000;
