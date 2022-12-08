@@ -4,16 +4,17 @@ import Review from '../review/review';
 
 
 type MoviePageReviewsProps = {
-  reviews: Reviews;
+  reviews?: Reviews;
 }
 
 function MoviePageReviews(props: MoviePageReviewsProps) {
   return(
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
-        {props.reviews.map((review) => (
-          <Review key={review.id} review={review}/>
-        ))}
+        {props.reviews &&
+          props.reviews.map((review) => (
+            <Review key={review.id} review={review}/>
+          ))}
       </div>
     </div>
   );

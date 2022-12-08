@@ -1,4 +1,6 @@
-import React, {useState, ChangeEvent} from 'react';
+import React, {ChangeEvent} from 'react';
+import {store} from '../../store';
+import {saveCurrentRating} from '../../store/action';
 
 
 type StarProps = {
@@ -6,12 +8,11 @@ type StarProps = {
 }
 
 function Star(props: StarProps){
-  const [, setRating] = useState(0);
   return(
     <React.Fragment>
       <input className="rating__input" id={`star-${props.id}`} type="radio" name="rating" value={`${props.id}`}
         onInput={({target}: ChangeEvent<HTMLInputElement>) => {
-          setRating(props.id);
+          store.dispatch(saveCurrentRating(props.id));
         }}
       />
       <label className="rating__label" htmlFor={`star-${props.id}`}>Rating {props.id}</label>

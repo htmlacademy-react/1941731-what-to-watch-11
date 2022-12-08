@@ -8,7 +8,7 @@ import {Reviews} from '../../types/reviews';
 
 type MoviePageTabsProps = {
   currentFilm: Film;
-  reviews: Reviews;
+  reviews?: Reviews;
 }
 
 function MoviePageTabs(props: MoviePageTabsProps): JSX.Element {

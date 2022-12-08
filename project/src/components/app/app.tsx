@@ -1,4 +1,4 @@
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
 
 
@@ -12,6 +12,8 @@ import Error404 from '../../pages/error-404/error-404';
 import PrivateRoute from '../private-route/private-route';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import {useAppSelector} from '../../hooks';
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
 
 
 function App(): JSX.Element{
@@ -24,7 +26,7 @@ function App(): JSX.Element{
     );
   }
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route path={AppRoute.Main}>
           <Route index element={<Main/>} />
@@ -41,7 +43,7 @@ function App(): JSX.Element{
         <Route path={AppRoute.Unknown} element={<Error404/>}/>
         <Route path ={AppRoute.AddReview} element={<AddReview />}/>
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 
