@@ -10,7 +10,13 @@ import {
   loadFilms,
   requireAuthorization,
   setError,
-  setFilmsDataLoadingStatus, loadPromo
+  setFilmsDataLoadingStatus,
+  loadPromo,
+  loadCurrentFilmInfo,
+  loadSimilarFilms,
+  loadReviews,
+  saveCurrentRating,
+  saveCurrentReviewText
 } from './action';
 import {MAX_SHOWN_FILMS, AuthorizationStatus} from '../const';
 
@@ -20,7 +26,11 @@ type InitialState = {
   films: Films;
   shownFilms: Films;
   promo: Film;
-  reviews: Reviews;
+  currentFilm?: Film;
+  similarFilms?: Films;
+  currentReviews?: Reviews;
+  currentReviewText?: string;
+  currentReviewRating?: number;
   authorizationStatus: AuthorizationStatus;
   isFilmsDataLoading: boolean;
   error: string | null;
@@ -30,8 +40,12 @@ const initialState: InitialState = {
   maxShownFilms: MAX_SHOWN_FILMS,
   films: [],
   promo: {} as Film,
+  currentFilm: undefined,
+  similarFilms: [],
+  currentReviews: [],
+  currentReviewText: undefined,
+  currentReviewRating: undefined,
   shownFilms: [],
-  reviews: [],
   authorizationStatus: AuthorizationStatus.Unknown,
   isFilmsDataLoading: false,
   error: null
@@ -43,6 +57,21 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadPromo, (state, action) => {
       state.promo = action.payload;
+    })
+    .addCase(loadCurrentFilmInfo, (state, action) => {
+      state.currentFilm = action.payload;
+    })
+    .addCase(loadSimilarFilms, (state, action) => {
+      state.similarFilms = action.payload;
+    })
+    .addCase(loadReviews, (state, action) => {
+      state.currentReviews = action.payload;
+    })
+    .addCase(saveCurrentRating, (state, action) => {
+      state.currentReviewRating = action.payload;
+    })
+    .addCase(saveCurrentReviewText, (state, action) => {
+      state.currentReviewText = action.payload;
     })
     .addCase(getFilmList, (state) => {
       state.shownFilms = state.films.filter((film: Film) => film.genre === state.currentGenre);

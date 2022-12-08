@@ -7,7 +7,7 @@ import {Reviews} from '../../types/reviews';
 
 type currentTabProps = {
   currentFilm: Film;
-  reviews: Reviews;
+  reviews?: Reviews;
   activeItem: string;
 }
 function CurrentTab(props: currentTabProps): JSX.Element{

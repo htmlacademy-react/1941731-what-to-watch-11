@@ -2,22 +2,24 @@ import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, State} from '../types/state.js';
 import {Film, Films} from '../types/films';
-
 import {
   getInitialFilms,
+  loadCurrentFilmInfo,
   loadFilms,
   loadPromo,
+  loadSimilarFilms,
   redirectToRoute,
   requireAuthorization,
   setError,
-  setFilmsDataLoadingStatus
+  setFilmsDataLoadingStatus,
+  loadReviews
 } from './action';
 import {dropToken, saveToken} from '../services/token';
 import {APIRoute, AppRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR} from '../const';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
 import {store} from './';
-
+import { Review, Reviews} from '../types/reviews';
 
 export const clearErrorAction = createAsyncThunk(
   'app/clearError',
@@ -56,17 +58,60 @@ export const fetchPromoAction = createAsyncThunk<void, undefined, {
   },
 );
 
-// export const fetchFilmInfoAction = createAsyncThunk<void, undefined, {
-//   dispatch: AppDispatch;
-//   state: State;
-//   extra: AxiosInstance;
-// }>(
-//   'data/fetchFilmInfo',
-//   async (_arg, {dispatch, extra: api}) => {
-//     const {data} = await api.get<Film>(APIRoute.Film);
-//     dispatch(loadFilmInfo(data));
-//   },
-// );
+export const fetchCurrentFilmInfoAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchFilmInfo',
+  async (id, {dispatch, extra: api}) => {
+    const resp = await api.get<Film>(`/films/${id}`).catch(()=> null);
+    if (resp){
+      dispatch(loadCurrentFilmInfo(resp.data)) ;
+    } else {
+      dispatch(redirectToRoute(AppRoute.Unknown));
+    }
+  },
+);
+
+export const fetchSimilarFilmsAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchSimilarFilms',
+  async (id, {dispatch, extra: api}) => {
+    const {data} = await api.get<Films>(`/films/${id}/similar`);
+    const result = data.filter((film) => film.id !== +id);
+    result ? dispatch(loadSimilarFilms(result)) : redirectToRoute(AppRoute.Unknown);
+
+  },
+);
+
+export const fetchReviewsAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchSimilarFilms',
+  async (id, {dispatch, extra: api}) => {
+    const {data} = await api.get<Reviews>(`/comments/${id}`);
+    dispatch(loadReviews(data));
+  },
+);
+
+export const fetchSendReviewAction = createAsyncThunk<void, {filmId:number; review: Pick<Review, 'comment' | 'rating'> } , {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/sendReviewAction',
+  async ({filmId, review}, {dispatch, extra: api,getState}) => {
+    const {data} = await api.post<Review>(`/comments/${filmId}`, review);
+    dispatch(loadReviews([...(getState().currentReviews ?? []), data]));
+    dispatch(redirectToRoute(`/films/${filmId}`));
+  },
+);
 
 export const checkAuthAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;

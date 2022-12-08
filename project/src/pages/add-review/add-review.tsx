@@ -36,7 +36,7 @@ function AddReview(): JSX.Element | null {
           </div>
 
           <div className="add-review">
-            <AddComment/>
+            <AddComment filmId = {currentFilm.id}/>
           </div>
         </section>
       </Wrapper>

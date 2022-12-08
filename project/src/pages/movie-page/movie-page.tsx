@@ -1,5 +1,5 @@
-import React from 'react';
-import {useParams, Link} from 'react-router-dom';
+import React, {useState} from 'react';
+import {Link, useParams} from 'react-router-dom';
 
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
@@ -8,13 +8,35 @@ import Wrapper from '../../components/wrapper/wrapper';
 import MoviePageTabs from '../../components/movie-page-tabs/movie-page-tabs';
 import SimilarFilmList from '../../components/similar-film-list/similar-film-list';
 import {useAppSelector} from '../../hooks';
-
+import {fetchCurrentFilmInfoAction, fetchReviewsAction, fetchSimilarFilmsAction} from '../../store/api-actions';
+import {store} from '../../store';
+import {AuthorizationStatus} from '../../const';
 
 function MoviePage(): JSX.Element | null {
   const params = useParams();
-  const films = useAppSelector((state) => state.films);
-  const reviews = useAppSelector((state) => state.reviews);
-  const currentFilm = films.find((film) => film.id.toString() === params.id);
+
+  function getCurrentId() {
+    return params.id;
+  }
+  const [currentId, setCurrentId] = useState(getCurrentId);
+
+  React.useEffect(() => {
+    setCurrentId(getCurrentId());
+  }, [params.id]);
+
+  React.useEffect(() => {
+    if (currentId) {
+      store.dispatch(fetchCurrentFilmInfoAction(currentId));
+      store.dispatch(fetchSimilarFilmsAction(currentId));
+      store.dispatch(fetchReviewsAction(currentId));
+    }
+  }, [currentId]);
+
+
+  const reviews = useAppSelector((state) => state.currentReviews);
+  const currentFilm = useAppSelector((state) => state.currentFilm);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const canSubmitReview = authorizationStatus === AuthorizationStatus.Auth;
 
   if (currentFilm === undefined) {return (null);}
   {
@@ -52,7 +74,8 @@ function MoviePage(): JSX.Element | null {
                     <span>My list</span>
                     <span className="film-card__count">9</span>
                   </button>
-                  <Link to="review" className="btn film-card__button">Add review</Link>
+                  {canSubmitReview &&
+                    <Link to="review" className="btn film-card__button">Add review</Link>}
                 </div>
               </div>
             </div>
@@ -72,7 +95,7 @@ function MoviePage(): JSX.Element | null {
         <div className="page-content">
           <section className="catalog catalog--like-this">
             <h2 className="catalog__title">More like this</h2>
-            <SimilarFilmList currentFilm={currentFilm}/>
+            <SimilarFilmList />
           </section>
 
           <Footer/>
