@@ -8,7 +8,7 @@ import Wrapper from '../../components/wrapper/wrapper';
 import MoviePageTabs from '../../components/movie-page-tabs/movie-page-tabs';
 import SimilarFilmList from '../../components/similar-film-list/similar-film-list';
 import { useAppSelector } from '../../hooks';
-import { fetchCurrentFilmInfoAction, fetchSimilarFilmsAction } from '../../store/api-actions';
+import { fetchCurrentFilmInfoAction } from '../../store/api-actions';
 import { store } from '../../store';
 import { AuthorizationStatus } from '../../const';
 
@@ -30,7 +30,6 @@ function MoviePage(): JSX.Element | null {
   React.useEffect(() => {
     if (currentId) {
       store.dispatch(fetchCurrentFilmInfoAction(currentId));
-      store.dispatch(fetchSimilarFilmsAction(currentId));
     }
   }, [currentId]);
 

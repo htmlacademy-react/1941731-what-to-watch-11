@@ -107,7 +107,6 @@ export const fetchSendReviewAction = createAsyncThunk<
   }
 >('data/sendReviewAction', async ({ filmId, review }, { dispatch, extra: api, getState }) => {
   const { data } = await api.post<Review[]>(`/comments/${filmId}`, review);
-  console.log(data);
   dispatch(setReviews(data));
   dispatch(redirectToRoute(`/films/${filmId}`));
 });
