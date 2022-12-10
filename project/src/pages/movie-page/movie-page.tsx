@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Link, useParams} from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
@@ -7,13 +7,16 @@ import UserBlock from '../../components/user-block/user-block';
 import Wrapper from '../../components/wrapper/wrapper';
 import MoviePageTabs from '../../components/movie-page-tabs/movie-page-tabs';
 import SimilarFilmList from '../../components/similar-film-list/similar-film-list';
-import {useAppSelector} from '../../hooks';
-import {fetchCurrentFilmInfoAction, fetchReviewsAction, fetchSimilarFilmsAction} from '../../store/api-actions';
-import {store} from '../../store';
-import {AuthorizationStatus} from '../../const';
+import { useAppSelector } from '../../hooks';
+import { fetchCurrentFilmInfoAction, fetchSimilarFilmsAction } from '../../store/api-actions';
+import { store } from '../../store';
+import { AuthorizationStatus } from '../../const';
 
 function MoviePage(): JSX.Element | null {
   const params = useParams();
+  const currentFilm = useAppSelector((state) => state.currentFilm);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const canSubmitReview = authorizationStatus === AuthorizationStatus.Auth;
 
   function getCurrentId() {
     return params.id;
@@ -28,28 +31,23 @@ function MoviePage(): JSX.Element | null {
     if (currentId) {
       store.dispatch(fetchCurrentFilmInfoAction(currentId));
       store.dispatch(fetchSimilarFilmsAction(currentId));
-      store.dispatch(fetchReviewsAction(currentId));
     }
   }, [currentId]);
 
-
-  const reviews = useAppSelector((state) => state.currentReviews);
-  const currentFilm = useAppSelector((state) => state.currentFilm);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const canSubmitReview = authorizationStatus === AuthorizationStatus.Auth;
-
-  if (currentFilm === undefined) {return (null);}
+  if (currentFilm === undefined) {
+    return null;
+  }
   {
     return (
       <Wrapper>
         <section className="film-card film-card--full">
           <div className="film-card__hero">
             <div className="film-card__bg">
-              <img src={currentFilm.backgroundImage} alt={currentFilm.name}/>
+              <img src={currentFilm.backgroundImage} alt={currentFilm.name} />
             </div>
             <h1 className="visually-hidden">WTW</h1>
             <Header additionalClass={'film-card__head'}>
-              <UserBlock/>
+              <UserBlock />
             </Header>
 
             <div className="film-card__wrap">
@@ -74,8 +72,11 @@ function MoviePage(): JSX.Element | null {
                     <span>My list</span>
                     <span className="film-card__count">9</span>
                   </button>
-                  {canSubmitReview &&
-                    <Link to="review" className="btn film-card__button">Add review</Link>}
+                  {canSubmitReview && (
+                    <Link to="review" className="btn film-card__button">
+                      Add review
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>
@@ -84,10 +85,10 @@ function MoviePage(): JSX.Element | null {
           <div className="film-card__wrap film-card__translate-top">
             <div className="film-card__info">
               <div className="film-card__poster film-card__poster--big">
-                <img src={currentFilm.posterImage} alt={`${currentFilm.name} poster`} width="218" height="327"/>
+                <img src={currentFilm.posterImage} alt={`${currentFilm.name} poster`} width="218" height="327" />
               </div>
 
-              <MoviePageTabs currentFilm={currentFilm} reviews={reviews}/>
+              <MoviePageTabs currentFilm={currentFilm} />
             </div>
           </div>
         </section>
@@ -95,11 +96,10 @@ function MoviePage(): JSX.Element | null {
         <div className="page-content">
           <section className="catalog catalog--like-this">
             <h2 className="catalog__title">More like this</h2>
-            <SimilarFilmList />
+            {currentId && <SimilarFilmList currentId={currentId} />}
           </section>
 
-          <Footer/>
-
+          <Footer />
         </div>
       </Wrapper>
     );

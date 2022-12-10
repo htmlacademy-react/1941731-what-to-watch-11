@@ -6,10 +6,9 @@ import Header from '../../components/header/header';
 import UserBlock from '../../components/user-block/user-block';
 import Wrapper from '../../components/wrapper/wrapper';
 import ShowMore from '../../components/show-more/show-more';
-import {showDefaultAmountOfFilms} from '../../store/action';
-import {store} from '../../store';
-import {useAppSelector} from '../../hooks';
-
+import { showDefaultAmountOfFilms } from '../../store/action';
+import { store } from '../../store';
+import { useAppSelector } from '../../hooks';
 
 function Main(): JSX.Element {
   store.dispatch(showDefaultAmountOfFilms());
@@ -19,20 +18,19 @@ function Main(): JSX.Element {
     <Wrapper>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src={promo.backgroundImage} alt={films[0].name}/>
+          <img src={promo.backgroundImage} alt={films[0].name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
 
         <Header additionalClass={'film-card__head'}>
-          <UserBlock/>
+          <UserBlock />
         </Header>
-
 
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src={promo.posterImage} alt={promo.name} width="218" height="327"/>
+              <img src={promo.posterImage} alt={promo.name} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
@@ -66,14 +64,14 @@ function Main(): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenreList films={films}/>
+          <GenreList films={films} />
 
-          <FilmList films = {films}/>
+          <FilmList films={films} />
 
-          <ShowMore films={films}/>
+          <ShowMore films={films} />
         </section>
 
-        <Footer/>
+        <Footer />
       </div>
     </Wrapper>
   );

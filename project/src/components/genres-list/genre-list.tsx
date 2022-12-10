@@ -1,12 +1,12 @@
 import Genre from '../genre/genre';
-import {Films} from '../../types/films';
-import React, {useState} from 'react';
+import { Films } from '../../types/films';
+import React, { useState } from 'react';
 
 type GenreListProps = {
-  films : Films;
-}
+  films: Films;
+};
 
-function GenreList({films} : GenreListProps): JSX.Element {
+function GenreList({ films }: GenreListProps): JSX.Element {
   function getGenres() {
     const genreList = ['All genres'];
     films.forEach((film) => {
@@ -22,13 +22,11 @@ function GenreList({films} : GenreListProps): JSX.Element {
     setGenres(getGenres());
   }, []);
 
-  return(
+  return (
     <ul className="catalog__genres-list">
-      {
-        genres.map((genre) => (
-          <Genre key ={genre} genreName={genre}/>
-        ))
-      }
+      {genres.map((genre) => (
+        <Genre key={genre} genreName={genre} />
+      ))}
     </ul>
   );
 }

@@ -1,9 +1,9 @@
-import {Link} from 'react-router-dom';
-import {AppRoute} from '../../const';
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
 import React from 'react';
 
 function Footer(): JSX.Element {
-  return(
+  return (
     <footer className="page-footer">
       <div className="logo">
         <Link to={AppRoute.Main} className="logo__link logo__link--light">

@@ -6,6 +6,8 @@
     "@reduxjs/toolkit": "^1.8.6",
     "axios": "^0.27.2",
     "classnames": "^2.3.2",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "history": "^5.3.0",
     "http-status-codes": "^2.2.0",
     "react": "^18.2.0",
@@ -24,12 +26,14 @@
   "eslintConfig": {
     "parser": "@typescript-eslint/parser",
     "plugins": [
-      "@typescript-eslint"
+      "@typescript-eslint",
+      "prettier"
     ],
     "extends": [
       "react-app",
       "react-app/jest",
-      "htmlacademy/react-typescript"
+      "htmlacademy/react-typescript",
+      "plugin:prettier/recommended"
     ],
     "parserOptions": {
       "project": [
@@ -59,6 +63,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "prettier": {
+    "bracketSpacing": true,
+    "bracketSameLine": true,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "printWidth": 120
   },
   "devDependencies": {
     "@jedmao/redux-mock-store": "^3.0.5",
