@@ -1,6 +1,6 @@
-import {Film, Films} from '../types/films';
-import {Reviews} from '../types/reviews';
-import {createReducer} from '@reduxjs/toolkit';
+import { Film, Films } from '../types/films';
+import { Reviews } from '../types/reviews';
+import { createReducer } from '@reduxjs/toolkit';
 import {
   genreChange,
   getFilmList,
@@ -14,11 +14,11 @@ import {
   loadPromo,
   loadCurrentFilmInfo,
   loadSimilarFilms,
-  loadReviews,
+  setReviews,
   saveCurrentRating,
-  saveCurrentReviewText
+  saveCurrentReviewText,
 } from './action';
-import {MAX_SHOWN_FILMS, AuthorizationStatus} from '../const';
+import { MAX_SHOWN_FILMS, AuthorizationStatus } from '../const';
 
 type InitialState = {
   currentGenre: string;
@@ -48,7 +48,7 @@ const initialState: InitialState = {
   shownFilms: [],
   authorizationStatus: AuthorizationStatus.Unknown,
   isFilmsDataLoading: false,
-  error: null
+  error: null,
 };
 const reducer = createReducer(initialState, (builder) => {
   builder
@@ -64,7 +64,7 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loadSimilarFilms, (state, action) => {
       state.similarFilms = action.payload;
     })
-    .addCase(loadReviews, (state, action) => {
+    .addCase(setReviews, (state, action) => {
       state.currentReviews = action.payload;
     })
     .addCase(saveCurrentRating, (state, action) => {
@@ -79,13 +79,13 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(getInitialFilms, (state) => {
       state.shownFilms = state.films;
     })
-    .addCase(genreChange, (state,action) => {
+    .addCase(genreChange, (state, action) => {
       state.currentGenre = action.payload;
     })
-    .addCase(showMoreFilms, (state,action) => {
+    .addCase(showMoreFilms, (state, action) => {
       state.maxShownFilms += MAX_SHOWN_FILMS;
     })
-    .addCase(showDefaultAmountOfFilms, (state,action) => {
+    .addCase(showDefaultAmountOfFilms, (state, action) => {
       state.maxShownFilms = MAX_SHOWN_FILMS;
     })
     .addCase(requireAuthorization, (state, action) => {
@@ -99,5 +99,4 @@ const reducer = createReducer(initialState, (builder) => {
     });
 });
 
-
-export {reducer};
+export { reducer };

@@ -1,28 +1,30 @@
 import React from 'react';
-import {useParams} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Wrapper from '../../components/wrapper/wrapper';
-import {useAppSelector} from '../../hooks';
+import { useAppSelector } from '../../hooks';
 
-
-function Player(): JSX.Element | null{
+function Player(): JSX.Element | null {
   const params = useParams();
   const films = useAppSelector((state) => state.films);
   const currentFilm = films.find((film) => film.id.toString() === params.id);
 
-  if (currentFilm === undefined) {return (null);}
-  else{
+  if (currentFilm === undefined) {
+    return null;
+  } else {
     return (
       <Wrapper>
         <div className="player">
-
-
-          <button type="button" className="player__exit">Exit</button>
+          <button type="button" className="player__exit">
+            Exit
+          </button>
 
           <div className="player__controls">
             <div className="player__controls-row">
               <div className="player__time">
                 <progress className="player__progress" value="30" max="100"></progress>
-                <div className="player__toggler" style={{left: '30%'}}>Toggler</div>
+                <div className="player__toggler" style={{ left: '30%' }}>
+                  Toggler
+                </div>
               </div>
               <div className="player__time-value">1:30:29</div>
             </div>

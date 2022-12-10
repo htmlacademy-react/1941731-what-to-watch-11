@@ -4,8 +4,7 @@ import FilmList from '../../components/film-list/film-list';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import Wrapper from '../../components/wrapper/wrapper';
-import {useAppSelector} from '../../hooks';
-
+import { useAppSelector } from '../../hooks';
 
 function MyList(): JSX.Element {
   const films = useAppSelector((state) => state.films);
@@ -19,11 +18,10 @@ function MyList(): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <FilmList films = {films}/>
+          <FilmList films={films} />
         </section>
 
-        <Footer/>
-
+        <Footer />
       </div>
     </Wrapper>
   );

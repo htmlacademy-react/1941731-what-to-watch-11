@@ -1,16 +1,15 @@
 import HeaderLogo from '../header-logo/header-logo';
-import React, {ReactNode} from 'react';
+import React, { ReactNode } from 'react';
 type HeaderPropsType = {
   additionalClass?: string;
-  children?:ReactNode;
-}
+  children?: ReactNode;
+};
 function Header(props: HeaderPropsType) {
-  return(
+  return (
     <header className={`page-header ${props.additionalClass || ''}`}>
-      <HeaderLogo/>
+      <HeaderLogo />
       {props.children}
     </header>
   );
 }
 export default Header;
-

@@ -13,6 +13,6 @@ export type AddReview = {
   filmId: number;
   comment: string;
   rating: number;
-}
+};
 
-export type Reviews = Review[]
+export type Reviews = Review[];

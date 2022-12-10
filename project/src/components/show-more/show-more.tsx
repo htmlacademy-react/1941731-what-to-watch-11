@@ -1,21 +1,21 @@
-import React, {useState} from 'react';
-import {showMoreFilms} from '../../store/action';
-import {useAppDispatch, useAppSelector} from '../../hooks';
-import {Films} from '../../types/films';
+import React, { useState } from 'react';
+import { showMoreFilms } from '../../store/action';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { Films } from '../../types/films';
 import classNames from 'classnames';
 
 type showMoreProps = {
   films: Films;
-}
+};
 
-function ShowMore({films} : showMoreProps): JSX.Element {
+function ShowMore({ films }: showMoreProps): JSX.Element {
   const dispatch = useAppDispatch();
   const currentMaxShownFilms = useAppSelector((state) => state.maxShownFilms);
   const amountOfFilms = useAppSelector((state) => state.shownFilms.length);
 
   function getShowMore() {
     let isShown = true;
-    if (currentMaxShownFilms >= amountOfFilms){
+    if (currentMaxShownFilms >= amountOfFilms) {
       isShown = false;
     }
     return isShown;
@@ -25,13 +25,16 @@ function ShowMore({films} : showMoreProps): JSX.Element {
     setShowMore(getShowMore());
   });
 
-  return(
+  return (
     <div className="catalog__more">
-      <button className={classNames('catalog__button', { 'visually-hidden': !showMore })} type="button"
+      <button
+        className={classNames('catalog__button', { 'visually-hidden': !showMore })}
+        type="button"
         onClick={() => {
           dispatch(showMoreFilms());
         }}
-      >Show more
+      >
+        Show more
       </button>
     </div>
   );

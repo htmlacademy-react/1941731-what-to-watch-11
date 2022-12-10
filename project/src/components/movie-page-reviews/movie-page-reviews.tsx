@@ -1,20 +1,30 @@
-import {Reviews} from '../../types/reviews';
 import React from 'react';
 import Review from '../review/review';
-
+import { fetchReviewsAction } from '../../store/api-actions';
+import { Film } from '../../types/films';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { setReviews } from '../../store/action';
 
 type MoviePageReviewsProps = {
-  reviews?: Reviews;
-}
+  currentFilm: Film;
+};
 
 function MoviePageReviews(props: MoviePageReviewsProps) {
-  return(
+  const dispatch = useAppDispatch();
+
+  React.useEffect(() => {
+    if (props.currentFilm.id) {
+      dispatch(setReviews([]));
+      dispatch(fetchReviewsAction(props.currentFilm.id.toString()));
+    }
+  }, [props.currentFilm.id]);
+  const reviews = useAppSelector((state) => state.currentReviews);
+  return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
-        {props.reviews &&
-          props.reviews.map((review) => (
-            <Review key={review.id} review={review}/>
-          ))}
+        {reviews?.map((review) => (
+          <Review key={review.id} review={review} />
+        ))}
       </div>
     </div>
   );
