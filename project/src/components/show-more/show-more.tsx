@@ -32,7 +32,8 @@ function ShowMore({ films }: showMoreProps): JSX.Element {
         type="button"
         onClick={() => {
           dispatch(showMoreFilms());
-        }}>
+        }}
+      >
         Show more
       </button>
     </div>

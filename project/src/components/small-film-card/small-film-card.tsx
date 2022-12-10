@@ -28,7 +28,8 @@ function SmallFilmCard(props: SmallFilmCardProps) {
       }}
       onMouseLeave={({ target }: MouseEvent<HTMLInputElement>) => {
         setIsActive(false);
-      }}>
+      }}
+    >
       <div className="small-film-card__image">
         <VideoPlayer
           renderVideo={renderVideo}

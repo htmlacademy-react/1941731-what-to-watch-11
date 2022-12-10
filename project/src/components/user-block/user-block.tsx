@@ -31,7 +31,8 @@ function UserBlock() {
             className="user-block__link"
             onClick={() => {
               dispatch(logoutAction());
-            }}>
+            }}
+          >
             Sign out
           </a>
         ) : (

@@ -21,7 +21,8 @@ function Genre(props: GenreProps) {
             dispatch(getFilmList());
           }
           dispatch(showDefaultAmountOfFilms());
-        }}>
+        }}
+      >
         {props.genreName}
       </div>
     </li>

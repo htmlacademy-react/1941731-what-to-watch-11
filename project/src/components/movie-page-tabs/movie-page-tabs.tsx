@@ -17,36 +17,42 @@ function MoviePageTabs(props: MoviePageTabsProps): JSX.Element {
           <li
             className={classNames('film-nav__item', {
               'film-nav__item--active': activeItem === TABS.overview,
-            })}>
+            })}
+          >
             <div
               onClick={() => {
                 setActiveItem(TABS.overview);
               }}
-              className="film-nav__link">
+              className="film-nav__link"
+            >
               Overview
             </div>
           </li>
           <li
             className={classNames('film-nav__item', {
               'film-nav__item--active': activeItem === TABS.details,
-            })}>
+            })}
+          >
             <div
               onClick={() => {
                 setActiveItem(TABS.details);
               }}
-              className="film-nav__link">
+              className="film-nav__link"
+            >
               Details
             </div>
           </li>
           <li
             className={classNames('film-nav__item', {
               'film-nav__item--active': activeItem === TABS.reviews,
-            })}>
+            })}
+          >
             <div
               onClick={() => {
                 setActiveItem(TABS.reviews);
               }}
-              className="film-nav__link">
+              className="film-nav__link"
+            >
               Reviews
             </div>
           </li>

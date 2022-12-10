@@ -27,12 +27,12 @@
   "eslintConfig": {
     "parser": "@typescript-eslint/parser",
     "plugins": [
-      "@typescript-eslint",
+      "@typescript-eslint"
     ],
     "extends": [
       "react-app",
       "react-app/jest",
-      "htmlacademy/react-typescript",
+      "htmlacademy/react-typescript"
     ],
     "parserOptions": {
       "project": [
