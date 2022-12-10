@@ -28,13 +28,11 @@
     "parser": "@typescript-eslint/parser",
     "plugins": [
       "@typescript-eslint",
-      "prettier"
     ],
     "extends": [
       "react-app",
       "react-app/jest",
       "htmlacademy/react-typescript",
-      "plugin:prettier/recommended"
     ],
     "parserOptions": {
       "project": [
