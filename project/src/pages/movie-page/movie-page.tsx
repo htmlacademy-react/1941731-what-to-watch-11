@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
@@ -7,31 +7,20 @@ import UserBlock from '../../components/user-block/user-block';
 import Wrapper from '../../components/wrapper/wrapper';
 import MoviePageTabs from '../../components/movie-page-tabs/movie-page-tabs';
 import SimilarFilmList from '../../components/similar-film-list/similar-film-list';
-import { useAppSelector } from '../../hooks';
-import { fetchCurrentFilmInfoAction } from '../../store/api-actions';
-import { store } from '../../store';
-import { AuthorizationStatus } from '../../const';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import FilmCardButtons from '../../components/film-card-buttons/film-card-buttons';
+import {fetchCurrentFilmInfoAction} from '../../store/api-actions';
 
 function MoviePage(): JSX.Element | null {
   const params = useParams();
+  const dispatch = useAppDispatch();
   const currentFilm = useAppSelector((state) => state.currentFilm);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const canSubmitReview = authorizationStatus === AuthorizationStatus.Auth;
 
-  function getCurrentId() {
-    return params.id;
-  }
-  const [currentId, setCurrentId] = useState(getCurrentId);
-
-  React.useEffect(() => {
-    setCurrentId(getCurrentId());
-  }, [params.id]);
-
-  React.useEffect(() => {
-    if (currentId) {
-      store.dispatch(fetchCurrentFilmInfoAction(currentId));
+  useEffect(() => {
+    if (params.id) {
+      dispatch(fetchCurrentFilmInfoAction(Number(params.id)));
     }
-  }, [currentId]);
+  }, [params.id]);
 
   if (currentFilm === undefined) {
     return null;
@@ -57,26 +46,7 @@ function MoviePage(): JSX.Element | null {
                   <span className="film-card__year">{currentFilm.released}</span>
                 </p>
 
-                <div className="film-card__buttons">
-                  <button className="btn btn--play film-card__button" type="button">
-                    <svg viewBox="0 0 19 19" width="19" height="19">
-                      <use xlinkHref="#play-s"></use>
-                    </svg>
-                    <span>Play</span>
-                  </button>
-                  <button className="btn btn--list film-card__button" type="button">
-                    <svg viewBox="0 0 19 20" width="19" height="20">
-                      <use xlinkHref="#add"></use>
-                    </svg>
-                    <span>My list</span>
-                    <span className="film-card__count">9</span>
-                  </button>
-                  {canSubmitReview && (
-                    <Link to="review" className="btn film-card__button">
-                      Add review
-                    </Link>
-                  )}
-                </div>
+                <FilmCardButtons />
               </div>
             </div>
           </div>
@@ -95,7 +65,7 @@ function MoviePage(): JSX.Element | null {
         <div className="page-content">
           <section className="catalog catalog--like-this">
             <h2 className="catalog__title">More like this</h2>
-            {currentId && <SimilarFilmList currentId={currentId} />}
+            {params.id && <SimilarFilmList currentId={params.id} />}
           </section>
 
           <Footer />

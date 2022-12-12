@@ -30,7 +30,7 @@ function SmallFilmCard(props: SmallFilmCardProps) {
         setIsActive(false);
       }}
     >
-      <div className="small-film-card__image">
+      <Link to={`/films/${props.currentFilm.id}`} className="small-film-card__image">
         <VideoPlayer
           renderVideo={renderVideo}
           isActive={isActive}
@@ -38,7 +38,7 @@ function SmallFilmCard(props: SmallFilmCardProps) {
           muted
           poster={props.currentFilm.previewImage}
         />
-      </div>
+      </Link>
       <h3 className="small-film-card__title">
         <Link className="small-film-card__link" to={`/films/${props.currentFilm.id}`} relative="path">
           {props.currentFilm.name}

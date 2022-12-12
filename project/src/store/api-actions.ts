@@ -1,25 +1,24 @@
-import { AxiosInstance } from 'axios';
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AppDispatch, State } from '../types/state.js';
-import { Film, Films } from '../types/films';
+import {AxiosInstance} from 'axios';
+import {createAsyncThunk} from '@reduxjs/toolkit';
+import {AppDispatch, State} from '../types/state.js';
+import {Film, Films} from '../types/films';
 import {
   getInitialFilms,
-  loadCurrentFilmInfo,
   loadFilms,
-  loadPromo,
   loadSimilarFilms,
   redirectToRoute,
-  requireAuthorization,
+  requireAuthorization, setCurrentFilm,
   setError,
-  setFilmsDataLoadingStatus,
+  setFilmsDataLoadingStatus, setMyList,
   setReviews,
 } from './action';
-import { dropToken, saveToken } from '../services/token';
-import { APIRoute, AppRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../const';
-import { AuthData } from '../types/auth-data';
-import { UserData } from '../types/user-data';
-import { store } from './';
-import { Review, Reviews } from '../types/reviews';
+import {dropToken, saveToken} from '../services/token';
+import {APIRoute, AppRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR} from '../const';
+import {AuthData} from '../types/auth-data';
+import {UserData} from '../types/user-data';
+import {store} from './';
+import {Review, Reviews} from '../types/reviews';
+import {FavoriteStatus} from '../types/favoriteStatus';
 
 export const clearErrorAction = createAsyncThunk('app/clearError', () => {
   setTimeout(() => store.dispatch(setError(null)), TIMEOUT_SHOW_ERROR);
@@ -51,21 +50,56 @@ export const fetchPromoAction = createAsyncThunk<
   }
 >('data/fetchPromo', async (_arg, { dispatch, extra: api }) => {
   const { data } = await api.get<Film>(APIRoute.PromoFilm);
-  dispatch(loadPromo(data));
+  dispatch(setCurrentFilm(data));
 });
 
+export const fetchMyListAction = createAsyncThunk<
+  void,
+  undefined,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+  >('data/fetchMyList', async (_arg, { dispatch, extra: api }) => {
+    const { data } = await api.get<Films>(APIRoute.Favourite);
+    dispatch(setMyList(data));
+  });
+export const fetchUpdateMyListAction = createAsyncThunk<
+  void,
+  { filmId: number; isFavourite: boolean },
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+  >('data/addToMyListAction', async ({ filmId, isFavourite }, { dispatch, extra: api, getState }) => {
+    const favouriteStatus = isFavourite ? FavoriteStatus.delete : FavoriteStatus.add ;
+    const { data } = await api.post<Film>(`/favorite/${filmId}/${favouriteStatus}`);
+    const previousFavouriteFilms = getState().myList.filter((film) => film.id !== filmId);
+    if (isFavourite){
+      dispatch(setMyList([...previousFavouriteFilms, data]));
+    } else {
+      dispatch(setMyList(previousFavouriteFilms));
+    }
+    if (filmId === getState().currentFilm?.id) {
+      dispatch(setCurrentFilm(data));
+    }
+    dispatch(fetchMyListAction());
+  });
 export const fetchCurrentFilmInfoAction = createAsyncThunk<
   void,
-  string,
+  number,
   {
     dispatch: AppDispatch;
     state: State;
     extra: AxiosInstance;
   }
 >('data/fetchFilmInfo', async (id, { dispatch, extra: api }) => {
+  dispatch(setCurrentFilm(undefined));
   const resp = await api.get<Film>(`/films/${id}`).catch(() => null);
   if (resp) {
-    dispatch(loadCurrentFilmInfo(resp.data));
+    dispatch(setCurrentFilm(resp.data));
   } else {
     dispatch(redirectToRoute(AppRoute.Unknown));
   }

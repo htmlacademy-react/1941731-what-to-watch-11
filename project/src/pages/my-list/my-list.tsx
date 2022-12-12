@@ -5,9 +5,14 @@ import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import Wrapper from '../../components/wrapper/wrapper';
 import { useAppSelector } from '../../hooks';
+import {store} from '../../store';
+import {fetchMyListAction} from '../../store/api-actions';
 
 function MyList(): JSX.Element {
-  const films = useAppSelector((state) => state.films);
+  React.useEffect(() => {
+    store.dispatch(fetchMyListAction());
+  }, []);
+  const myList = useAppSelector((state) => state.myList);
   return (
     <Wrapper>
       <div className="user-page">
@@ -18,7 +23,7 @@ function MyList(): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <FilmList films={films} />
+          <FilmList films={myList} />
         </section>
 
         <Footer />
