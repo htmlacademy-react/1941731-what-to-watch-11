@@ -10,11 +10,20 @@ import Player from '../../pages/player/player';
 import Error404 from '../../pages/error-404/error-404';
 import PrivateRoute from '../private-route/private-route';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
-import { useAppSelector } from '../../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
+import React, {useEffect} from 'react';
+import {checkAuthAction, fetchFilmsAction, fetchPromoAction} from '../../store/api-actions';
 
 function App(): JSX.Element {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(checkAuthAction());
+    dispatch(fetchFilmsAction());
+    dispatch(fetchPromoAction());
+  }, []);
+
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const isFilmsDataLoading = useAppSelector((state) => state.isFilmsDataLoading);
 

@@ -12,11 +12,12 @@ import {
   setError,
   setFilmsDataLoadingStatus,
   loadPromo,
-  loadCurrentFilmInfo,
+  setCurrentFilm,
   loadSimilarFilms,
   setReviews,
   saveCurrentRating,
   saveCurrentReviewText,
+  setMyList
 } from './action';
 import { MAX_SHOWN_FILMS, AuthorizationStatus } from '../const';
 
@@ -25,7 +26,7 @@ type InitialState = {
   maxShownFilms: number;
   films: Films;
   shownFilms: Films;
-  promo: Film;
+  myList: Films;
   currentFilm?: Film;
   similarFilms?: Films;
   currentReviews?: Reviews;
@@ -39,7 +40,7 @@ const initialState: InitialState = {
   currentGenre: 'All genres',
   maxShownFilms: MAX_SHOWN_FILMS,
   films: [],
-  promo: {} as Film,
+  myList: [],
   currentFilm: undefined,
   similarFilms: [],
   currentReviews: [],
@@ -56,9 +57,12 @@ const reducer = createReducer(initialState, (builder) => {
       state.films = action.payload;
     })
     .addCase(loadPromo, (state, action) => {
-      state.promo = action.payload;
+      state.currentFilm = action.payload;
     })
-    .addCase(loadCurrentFilmInfo, (state, action) => {
+    .addCase(setMyList, (state, action) => {
+      state.myList = action.payload;
+    })
+    .addCase(setCurrentFilm, (state, action) => {
       state.currentFilm = action.payload;
     })
     .addCase(loadSimilarFilms, (state, action) => {

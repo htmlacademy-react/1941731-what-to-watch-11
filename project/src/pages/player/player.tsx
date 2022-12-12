@@ -1,12 +1,51 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import React, {useEffect, useRef, useState} from 'react';
 import Wrapper from '../../components/wrapper/wrapper';
-import { useAppSelector } from '../../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {Link, useParams} from 'react-router-dom';
+import {fetchCurrentFilmInfoAction} from '../../store/api-actions';
 
 function Player(): JSX.Element | null {
   const params = useParams();
-  const films = useAppSelector((state) => state.films);
-  const currentFilm = films.find((film) => film.id.toString() === params.id);
+  const currentFilm = useAppSelector((state) => state.currentFilm);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (params.id) {
+      dispatch(fetchCurrentFilmInfoAction(Number(params.id)));
+    }
+  }, [params.id]);
+
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [playing, setPlaying] = useState(true);
+  const videoHandler = (control:string) => {
+    if (currentFilm && videoRef.current){
+      if (control === 'play') {
+        videoRef.current.play();
+        setPlaying(true);
+        setTimeLeft(videoTime - videoRef.current?.currentTime);
+      } else if (control === 'pause' && videoRef.current) {
+        videoRef.current.pause();
+        setPlaying(false);
+      }
+    }
+  };
+
+  const [videoTime, setVideoTime] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(0);
+  const [progress, setProgress] = useState(0);
+  React.useEffect(() => {
+    setTimeout(() => {
+      if (videoRef.current){
+        setTimeLeft(videoTime - videoRef.current?.currentTime);
+        setProgress((videoRef.current?.currentTime / videoTime) * 100);
+      }
+    }, 1000);
+  });
+  const handleLoadedMetadata = () => {
+    if (videoRef.current){
+      setVideoTime(videoRef.current?.duration);
+      setTimeLeft(videoRef.current?.duration);
+    }};
 
   if (currentFilm === undefined) {
     return null;
@@ -14,28 +53,49 @@ function Player(): JSX.Element | null {
     return (
       <Wrapper>
         <div className="player">
-          <button type="button" className="player__exit">
+          <video id={currentFilm.name} onLoadedMetadata={handleLoadedMetadata} src={currentFilm.videoLink} ref={videoRef} autoPlay className="player__video" poster="img/player-poster.jpg">
+          </video>
+
+
+          <Link to={`/films/${currentFilm.id}`} type="button" className="player__exit">
             Exit
-          </button>
+          </Link>
 
           <div className="player__controls">
             <div className="player__controls-row">
               <div className="player__time">
-                <progress className="player__progress" value="30" max="100"></progress>
-                <div className="player__toggler" style={{ left: '30%' }}>
-                  Toggler
+                <progress className="player__progress" value={progress} max="100"></progress>
+                <div className="player__toggle" style={{left: '30%'}}>
                 </div>
               </div>
-              <div className="player__time-value">1:30:29</div>
+              <div className="player__time-value">{`${Math.floor(timeLeft / 60) }:${ (`0${ Math.floor(timeLeft % 60)}`).slice(-2)}`}</div>
             </div>
 
             <div className="player__controls-row">
-              <button type="button" className="player__play">
-                <svg viewBox="0 0 19 19" width="19" height="19">
-                  <use xlinkHref="#play-s"></use>
-                </svg>
-                <span>Play</span>
-              </button>
+              {playing ?
+                (
+                  <button
+                    onClick={() => videoHandler('pause')}
+                    type="button"
+                    className="player__play"
+                  >
+                    <svg viewBox="0 0 19 19" width="19" height="19">
+                      <use xlinkHref="#pause"></use>
+                    </svg>
+                    <span>Play</span>
+                  </button>)
+                :
+                (
+                  <button
+                    onClick={() => videoHandler('play')}
+                    type="button"
+                    className="player__play"
+                  >
+                    <svg viewBox="0 0 19 19" width="19" height="19">
+                      <use xlinkHref="#play-s"></use>
+                    </svg>
+                    <span>Play</span>
+                  </button>)}
               <div className="player__name">{currentFilm.name}</div>
 
               <button type="button" className="player__full-screen">

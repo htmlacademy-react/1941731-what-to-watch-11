@@ -18,7 +18,11 @@ export const loadFilms = createAction<Films>('data/loadFilms');
 
 export const loadPromo = createAction<Film>('data/loadPromo');
 
-export const loadCurrentFilmInfo = createAction<Film>('data/filmInfo');
+export const setMyList = createAction<Films>('data/loadMyList');
+
+export const setFilmStatus = createAction<Film>('data/setFilmStatus');
+
+export const setCurrentFilm = createAction<Film | undefined>('data/filmInfo');
 
 export const loadSimilarFilms = createAction<Films>('data/similarFilms');
 
