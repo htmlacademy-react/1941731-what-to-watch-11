@@ -15,34 +15,34 @@ function AddReview(): JSX.Element | null {
   if (currentFilm === undefined) {
     return null;
   }
-  {
-    return (
-      <Wrapper>
-        <section className="film-card film-card--full">
-          <div className="film-card__header">
-            <div className="film-card__bg">
-              <img src={currentFilm.backgroundImage} alt={currentFilm.name} />
-            </div>
 
-            <h1 className="visually-hidden">WTW</h1>
-
-            <Header>
-              <Breadcrumbs id={currentFilm.id} filmName={currentFilm.name} />
-              <UserBlock />
-            </Header>
-
-            <div className="film-card__poster film-card__poster--small">
-              <img src={currentFilm.posterImage} alt={`${currentFilm.name} poster`} width="218" height="327" />
-            </div>
+  return (
+    <Wrapper>
+      <section className="film-card film-card--full">
+        <div className="film-card__header">
+          <div className="film-card__bg">
+            <img src={currentFilm.backgroundImage} alt={currentFilm.name} />
           </div>
 
-          <div className="add-review">
-            <AddComment filmId={currentFilm.id} />
+          <h1 className="visually-hidden">WTW</h1>
+
+          <Header>
+            <Breadcrumbs id={currentFilm.id} filmName={currentFilm.name} />
+            <UserBlock />
+          </Header>
+
+          <div className="film-card__poster film-card__poster--small">
+            <img src={currentFilm.posterImage} alt={`${currentFilm.name} poster`} width="218" height="327" />
           </div>
-        </section>
-      </Wrapper>
-    );
-  }
+        </div>
+
+        <div className="add-review">
+          <AddComment filmId={currentFilm.id} />
+        </div>
+      </section>
+    </Wrapper>
+  );
 }
+
 
 export default AddReview;

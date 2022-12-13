@@ -1,6 +1,6 @@
 import React from 'react';
 import Wrapper from '../wrapper/wrapper';
-import { AMOUNT_OF_OVERVIEW_ACTORS } from '../../const';
+import {AMOUNT_OF_OVERVIEW_ACTORS, Rating} from '../../const';
 import { Film } from '../../types/films';
 
 type MoviePageOverviewProps = {
@@ -8,19 +8,19 @@ type MoviePageOverviewProps = {
 };
 function MoviePageOverview(props: MoviePageOverviewProps) {
   function getFilmRatingLevel(filmRating: number) {
-    if (filmRating <= 3) {
+    if (filmRating <= Rating.Bad) {
       return 'Bad';
     }
-    if (filmRating <= 5) {
+    if (filmRating <= Rating.Normal) {
       return 'Normal';
     }
-    if (filmRating <= 8) {
+    if (filmRating <= Rating.Good) {
       return 'Good';
     }
-    if (filmRating < 10) {
+    if (filmRating < Rating.Awesome) {
       return 'Very good';
     }
-    if (filmRating === 10) {
+    if (filmRating === Rating.Awesome) {
       return 'Awesome';
     }
   }

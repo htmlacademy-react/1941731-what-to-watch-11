@@ -18,7 +18,7 @@ function Main(): JSX.Element {
   useEffect(() => {
     dispatch(showDefaultAmountOfFilms());
     dispatch(fetchPromoAction());
-  }, []);
+  }, [dispatch]);
 
   const films = useAppSelector((state) => state.films);
   const currentFilm = useAppSelector((state) => state.currentFilm);
@@ -65,7 +65,7 @@ function Main(): JSX.Element {
 
           <FilmList films={films} />
 
-          <ShowMore films={films} />
+          <ShowMore/>
         </section>
 
         <Footer />

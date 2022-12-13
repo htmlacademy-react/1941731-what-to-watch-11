@@ -43,6 +43,12 @@ export enum TABS {
   details = 'Details',
   reviews = 'Reviews',
 }
+export enum Rating {
+  Bad = 3,
+  Normal = 5,
+  Good = 8,
+  Awesome = 10
+}
 
 export const AMOUNT_OF_STARS = 10;
 export const AMOUNT_OF_OVERVIEW_ACTORS = 3;
@@ -52,4 +58,5 @@ export const MAX_SHOWN_FILMS = 8;
 export const MAX_GENRES = 10;
 export const MAX_REVIEW_SIZE = 400;
 export const MIN_REVIEW_SIZE = 50;
+export const MINUTES_IN_HOUR = 60;
 export const TIMEOUT_SHOW_ERROR = 2000;

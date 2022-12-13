@@ -18,7 +18,7 @@ function SimilarFilmList(props: SimilarFilmListProps): JSX.Element {
     if (props.currentId) {
       store.dispatch(fetchSimilarFilmsAction(props.currentId));
     }
-  }, [currentGenre]);
+  }, [currentGenre, props.currentId]);
 
   return (
     <div className="catalog__films-list">

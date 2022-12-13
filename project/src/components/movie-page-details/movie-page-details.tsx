@@ -1,5 +1,6 @@
 import { Film } from '../../types/films';
 import React from 'react';
+import {MINUTES_IN_HOUR} from '../../const';
 
 type MoviePageDetailsProps = {
   currentFilm: Film;
@@ -7,7 +8,7 @@ type MoviePageDetailsProps = {
 
 function MoviePageDetails(props: MoviePageDetailsProps) {
   function getRunTime(runTime: number) {
-    return `${Math.floor(runTime / 60)}h ${runTime % 60}m`;
+    return `${Math.floor(runTime / MINUTES_IN_HOUR)}h ${runTime % MINUTES_IN_HOUR}m`;
   }
 
   return (

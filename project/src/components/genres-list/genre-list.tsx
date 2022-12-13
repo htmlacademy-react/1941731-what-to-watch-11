@@ -1,6 +1,6 @@
 import Genre from '../genre/genre';
 import {Films} from '../../types/films';
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {MAX_GENRE_LIST} from '../../const';
 
 type GenreListProps = {
@@ -8,7 +8,7 @@ type GenreListProps = {
 };
 
 function GenreList({ films }: GenreListProps): JSX.Element {
-  function getGenres() {
+  const getGenres = useCallback(()=> {
     const genreList = ['All genres'];
     films.forEach((film) => {
       if (!genreList.includes(film.genre)) {
@@ -19,12 +19,12 @@ function GenreList({ films }: GenreListProps): JSX.Element {
       return genreList.slice(0, MAX_GENRE_LIST);
     }
     return genreList;
-  }
+  }, [films]);
   const [genres, setGenres] = useState(getGenres);
 
   React.useEffect(() => {
     setGenres(getGenres());
-  }, []);
+  }, [getGenres]);
 
   return (
     <ul className="catalog__genres-list">

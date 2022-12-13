@@ -27,14 +27,14 @@ function UserBlock() {
       </li>
       <li className="user-block__item">
         {isLogged ? (
-          <a
+          <div
             className="user-block__link"
             onClick={() => {
               dispatch(logoutAction());
             }}
           >
             Sign out
-          </a>
+          </div>
         ) : (
           <Link to={AppRoute.SignIn} className="user-block__link">
             Sign in
