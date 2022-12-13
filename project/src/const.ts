@@ -14,6 +14,18 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export enum APIRoute {
+  Films = '/films',
+  Film = '/films/:filmId',
+  SimilarFilms = '/films/:filmId/similar',
+  PromoFilm = '/promo',
+  Favourite = '/favorite',
+  FavouriteStatus = '/favorite/{filmId}/{status}',
+  Reviews = '/comments/:filmId',
+  Login = '/login',
+  Logout = '/logout',
+}
+
 export const Genres = [
   'All genres',
   'Comedies',
@@ -26,10 +38,11 @@ export const Genres = [
   'Sci - Fi',
   'Thrillers',
 ];
-export const TABS =
-  {firstTab: 'Overview',
-    secondTab:'Details',
-    thirdTab:'Reviews'};
+export enum TABS {
+  overview = 'Overview',
+  details = 'Details',
+  reviews = 'Reviews',
+}
 
 export const AMOUNT_OF_STARS = 10;
 export const AMOUNT_OF_OVERVIEW_ACTORS = 3;
@@ -37,3 +50,4 @@ export const MAX_SIMILAR_FILMS = 4;
 export const MAX_GENRE_LIST = 10;
 export const MAX_SHOWN_FILMS = 8;
 export const MAX_GENRES = 10;
+export const TIMEOUT_SHOW_ERROR = 2000;

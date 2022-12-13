@@ -1,36 +1,32 @@
 import SmallFilmCard from '../../components/small-film-card/small-film-card';
-import {Film, Films} from '../../types/films';
-import {films} from '../../mocks/films';
-import React, {useMemo} from 'react';
-import {MAX_SIMILAR_FILMS} from '../../const';
+
+import React from 'react';
+import { useAppSelector } from '../../hooks';
+import { MAX_SIMILAR_FILMS } from '../../const';
+import { store } from '../../store';
+import { fetchSimilarFilmsAction } from '../../store/api-actions';
 
 type SimilarFilmListProps = {
-  currentFilm: Film;
-}
-
-function SimilarFilmList({currentFilm} : SimilarFilmListProps): JSX.Element {
-  function getSimilarFilms(film: Film){
-    if(film.genre === currentFilm.genre){
-      return film;
+  currentId: string;
+};
+function SimilarFilmList(props: SimilarFilmListProps): JSX.Element {
+  const currentGenre = useAppSelector((state) => state.currentGenre);
+  const similarFilms = useAppSelector((state) => state.similarFilms);
+  const shownFilms = similarFilms?.filter((film) => film.id !== +props.currentId);
+  const slicedFilms = shownFilms?.slice(0, MAX_SIMILAR_FILMS);
+  React.useEffect(() => {
+    if (props.currentId) {
+      store.dispatch(fetchSimilarFilmsAction(props.currentId));
     }
-  }
-  function getShownSimilarFilms(similarFilms: Films){
-    const shownSimilarFilms = similarFilms.filter((film) => film.id !== currentFilm.id);
-    return shownSimilarFilms.slice(0, MAX_SIMILAR_FILMS);
-  }
-  const similarFilms = useMemo(() => films.filter(getSimilarFilms),[currentFilm.genre]);
-  const shownSimilarFilms = getShownSimilarFilms(similarFilms);
-  return(
+  }, [currentGenre]);
+
+  return (
     <div className="catalog__films-list">
-      {shownSimilarFilms.map((film) => (
-        <SmallFilmCard
-          currentFilm={film}
-          key ={film.id}
-        />
+      {slicedFilms?.map((film) => (
+        <SmallFilmCard currentFilm={film} key={film.id} />
       ))}
     </div>
   );
 }
-
 
 export default SimilarFilmList;

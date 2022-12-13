@@ -1,30 +1,30 @@
 import React from 'react';
-import {useAppDispatch} from '../../hooks';
-import {genreChange, getFilmList, getInitialFilmList, showDefaultFilmList} from '../../store/action';
-import {Link} from 'react-router-dom';
-import {AppRoute} from '../../const';
+import { useAppDispatch } from '../../hooks';
+import { genreChange, getFilmList, getInitialFilms, showDefaultAmountOfFilms } from '../../store/action';
 
 type GenreProps = {
   genreName: string;
-}
+};
 
 function Genre(props: GenreProps) {
   const dispatch = useAppDispatch();
 
-  return(
+  return (
     <li className="catalog__genres-item catalog__genres-item">
-      <Link to={AppRoute.Main} className="catalog__genres-link"
+      <div
+        className="catalog__genres-link"
         onClick={() => {
           dispatch(genreChange(props.genreName));
-          if (props.genreName === 'All genres'){
-            dispatch(getInitialFilmList());
+          if (props.genreName === 'All genres') {
+            dispatch(getInitialFilms());
           } else {
             dispatch(getFilmList());
           }
-          dispatch(showDefaultFilmList());
+          dispatch(showDefaultAmountOfFilms());
         }}
-      >{props.genreName}
-      </Link>
+      >
+        {props.genreName}
+      </div>
     </li>
   );
 }

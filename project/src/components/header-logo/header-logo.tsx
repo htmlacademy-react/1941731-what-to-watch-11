@@ -1,12 +1,9 @@
-
-import {Link} from 'react-router-dom';
-import {AppRoute} from '../../const';
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
 import React from 'react';
 
 function HeaderLogo() {
-
-
-  return(
+  return (
     <div className="logo">
       <Link to={AppRoute.Main} className="logo__link">
         <span className="logo__letter logo__letter--1">W</span>

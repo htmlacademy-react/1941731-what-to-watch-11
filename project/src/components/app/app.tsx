@@ -1,6 +1,5 @@
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus} from '../../const';
-import {Films} from '../../types/films';
+import { Route, Routes } from 'react-router-dom';
+import { AppRoute, AuthorizationStatus } from '../../const';
 
 import Main from '../../pages/main/main';
 import MoviePage from '../../pages/movie-page/movie-page';
@@ -10,37 +9,49 @@ import MyList from '../../pages/my-list/my-list';
 import Player from '../../pages/player/player';
 import Error404 from '../../pages/error-404/error-404';
 import PrivateRoute from '../private-route/private-route';
-import {Reviews} from '../../types/reviews';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
+import React, {useEffect} from 'react';
+import {checkAuthAction, fetchFilmsAction, fetchPromoAction} from '../../store/api-actions';
 
-type AppScreenProps = {
-  films: Films;
-  reviews: Reviews;
-}
-function App(props : AppScreenProps): JSX.Element{
+function App(): JSX.Element {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(checkAuthAction());
+    dispatch(fetchFilmsAction());
+    dispatch(fetchPromoAction());
+  }, []);
+
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const isFilmsDataLoading = useAppSelector((state) => state.isFilmsDataLoading);
+
+  if (authorizationStatus === AuthorizationStatus.Unknown || isFilmsDataLoading) {
+    return <LoadingScreen />;
+  }
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route path={AppRoute.Main}>
-          <Route index element={<Main films = {props.films}/>} />
-          <Route path ={AppRoute.SignIn} element={<SignIn/>}/>
-          <Route path={AppRoute.MoviePage} element={<MoviePage reviews={props.reviews} films={props.films}/>} />
-          <Route path ={AppRoute.MyList} element={
-            <PrivateRoute
-              authorizationStatus={AuthorizationStatus.NoAuth}
-            >
-              <MyList films={props.films} />
-            </PrivateRoute>
-          }
+          <Route index element={<Main />} />
+          <Route path={AppRoute.SignIn} element={<SignIn />} />
+          <Route path={AppRoute.MoviePage} element={<MoviePage />} />
+          <Route
+            path={AppRoute.MyList}
+            element={
+              <PrivateRoute>
+                <MyList />
+              </PrivateRoute>
+            }
           />
-          <Route path ={AppRoute.Player} element={<Player films={props.films}/>}/>
+          <Route path={AppRoute.Player} element={<Player />} />
         </Route>
-        <Route path={AppRoute.Unknown} element={<Error404/>}/>
-        <Route path ={AppRoute.AddReview} element={<AddReview films={props.films}/>}/>
+        <Route path={AppRoute.Unknown} element={<Error404 />} />
+        <Route path={AppRoute.AddReview} element={<AddReview />} />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 
 export default App;
-
-

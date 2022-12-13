@@ -1,17 +1,18 @@
 import React from 'react';
-import {Films} from '../../types/films';
 
 import FilmList from '../../components/film-list/film-list';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import Wrapper from '../../components/wrapper/wrapper';
+import { useAppSelector } from '../../hooks';
+import {store} from '../../store';
+import {fetchMyListAction} from '../../store/api-actions';
 
-
-type MyListProps = {
-  films: Films;
-}
-
-function MyList({films} : MyListProps): JSX.Element {
+function MyList(): JSX.Element {
+  React.useEffect(() => {
+    store.dispatch(fetchMyListAction());
+  }, []);
+  const myList = useAppSelector((state) => state.myList);
   return (
     <Wrapper>
       <div className="user-page">
@@ -22,11 +23,10 @@ function MyList({films} : MyListProps): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <FilmList films = {films}/>
+          <FilmList films={myList} />
         </section>
 
-        <Footer/>
-
+        <Footer />
       </div>
     </Wrapper>
   );
