@@ -1,6 +1,7 @@
 import Genre from '../genre/genre';
-import { Films } from '../../types/films';
-import React, { useState } from 'react';
+import {Films} from '../../types/films';
+import React, {useState} from 'react';
+import {MAX_GENRE_LIST} from '../../const';
 
 type GenreListProps = {
   films: Films;
@@ -14,6 +15,9 @@ function GenreList({ films }: GenreListProps): JSX.Element {
         genreList.push(film.genre);
       }
     });
+    if (genreList.length > MAX_GENRE_LIST) {
+      return genreList.slice(0, MAX_GENRE_LIST);
+    }
     return genreList;
   }
   const [genres, setGenres] = useState(getGenres);

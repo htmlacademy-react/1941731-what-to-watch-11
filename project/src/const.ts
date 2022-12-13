@@ -47,6 +47,9 @@ export enum TABS {
 export const AMOUNT_OF_STARS = 10;
 export const AMOUNT_OF_OVERVIEW_ACTORS = 3;
 export const MAX_SIMILAR_FILMS = 4;
+export const MAX_GENRE_LIST = 10;
 export const MAX_SHOWN_FILMS = 8;
 export const MAX_GENRES = 10;
+export const MAX_REVIEW_SIZE = 400;
+export const MIN_REVIEW_SIZE = 50;
 export const TIMEOUT_SHOW_ERROR = 2000;

@@ -1,18 +1,20 @@
 import React from 'react';
 import { Review } from '../../types/reviews';
-type ReviewProps = {
+import Moment from 'react-moment';
+  type ReviewProps = {
   review: Review;
 };
 function ReviewItem(props: ReviewProps) {
+
   return (
     <div className="review">
       <blockquote className="review__quote">
         <p className="review__text">{props.review.comment}</p>
         <footer className="review__details">
           <cite className="review__author">{props.review.user.name}</cite>
-          <time className="review__date" dateTime="2016-12-24">
+          <Moment format="MMMM DD, YYYY" className="review__date">
             {props.review.date}
-          </time>
+          </Moment>
         </footer>
       </blockquote>
 
