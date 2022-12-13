@@ -13,7 +13,7 @@ import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import {checkAuthAction, fetchFilmsAction, fetchPromoAction} from '../../store/api-actions';
 
 function App(): JSX.Element {
@@ -22,7 +22,7 @@ function App(): JSX.Element {
     dispatch(checkAuthAction());
     dispatch(fetchFilmsAction());
     dispatch(fetchPromoAction());
-  }, []);
+  }, [dispatch]);
 
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const isFilmsDataLoading = useAppSelector((state) => state.isFilmsDataLoading);

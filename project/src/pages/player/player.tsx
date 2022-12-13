@@ -13,7 +13,7 @@ function Player(): JSX.Element | null {
     if (params.id) {
       dispatch(fetchCurrentFilmInfoAction(Number(params.id)));
     }
-  }, [params.id]);
+  }, [dispatch, params.id]);
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [playing, setPlaying] = useState(true);
@@ -62,7 +62,7 @@ function Player(): JSX.Element | null {
     return (
       <Wrapper>
         <div className="player">
-          <video id={currentFilm.name} onLoadedMetadata={handleLoadedMetadata} src={currentFilm.videoLink} ref={videoRef} autoPlay className="player__video" poster="img/player-poster.jpg">
+          <video id={currentFilm.name} onLoadedMetadata={handleLoadedMetadata} src={currentFilm.videoLink} ref={videoRef} autoPlay className="player__video" poster={currentFilm.posterImage}>
           </video>
           <Link to={`/films/${currentFilm.id}`} type="button" className="player__exit">
             Exit

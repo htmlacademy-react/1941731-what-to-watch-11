@@ -1,4 +1,4 @@
-import React, { useState, MouseEvent } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import VideoPlayer from '../video-player/video-player';
 import { Film } from '../../types/films';
@@ -23,10 +23,10 @@ function SmallFilmCard(props: SmallFilmCardProps) {
   return (
     <article
       className="small-film-card catalog__films-card"
-      onMouseOver={({ target }: MouseEvent<HTMLInputElement>) => {
+      onMouseOver={() => {
         setIsActive(true);
       }}
-      onMouseLeave={({ target }: MouseEvent<HTMLInputElement>) => {
+      onMouseLeave={() => {
         setIsActive(false);
       }}
     >

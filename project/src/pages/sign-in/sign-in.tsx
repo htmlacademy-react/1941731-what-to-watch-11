@@ -20,7 +20,7 @@ function SignIn(): JSX.Element {
     if (authorizationStatus === AuthorizationStatus.Auth){
       navigate(AppRoute.Main);
     }
-  }, [authorizationStatus]);
+  });
 
 
   const onSubmit = (authData: AuthData) => {

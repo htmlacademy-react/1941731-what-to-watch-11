@@ -17,7 +17,7 @@ function MoviePageReviews(props: MoviePageReviewsProps) {
       dispatch(setReviews([]));
       dispatch(fetchReviewsAction(props.currentFilm.id.toString()));
     }
-  }, [props.currentFilm.id]);
+  }, [dispatch, props.currentFilm.id]);
   const reviews = useAppSelector((state) => state.currentReviews);
   return (
     <div className="film-card__reviews film-card__row">
