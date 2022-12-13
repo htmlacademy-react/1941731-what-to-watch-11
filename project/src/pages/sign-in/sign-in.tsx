@@ -1,17 +1,27 @@
-import React from 'react';
+import React, {FormEvent, useRef, useState} from 'react';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import Wrapper from '../../components/wrapper/wrapper';
-import { useRef, FormEvent } from 'react';
-import { useAppDispatch } from '../../hooks';
-import { loginAction } from '../../store/api-actions';
-import { AuthData } from '../../types/auth-data';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {loginAction} from '../../store/api-actions';
+import {AuthData} from '../../types/auth-data';
+import {AppRoute, AuthorizationStatus} from '../../const';
+import {useNavigate} from 'react-router-dom';
 
 function SignIn(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  React.useEffect(() => {
+    if (authorizationStatus === AuthorizationStatus.Auth){
+      navigate(AppRoute.Main);
+    }
+  }, [authorizationStatus]);
+
 
   const onSubmit = (authData: AuthData) => {
     dispatch(loginAction(authData));
@@ -20,7 +30,7 @@ function SignIn(): JSX.Element {
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (loginRef.current !== null && passwordRef.current !== null) {
+    if (loginRef.current && passwordRef.current && isPasswordValid) {
       onSubmit({
         login: loginRef.current.value,
         password: passwordRef.current.value,
@@ -52,6 +62,12 @@ function SignIn(): JSX.Element {
               </div>
               <div className="sign-in__field">
                 <input
+                  onChange={() => {
+                    setIsPasswordValid(false);
+                    if (passwordRef.current?.value.match(/[a-z]/) && passwordRef.current?.value.match(/[0-9]/)) {
+                      setIsPasswordValid(true);
+                    }
+                  }}
                   ref={passwordRef}
                   className="sign-in__input"
                   type="password"
